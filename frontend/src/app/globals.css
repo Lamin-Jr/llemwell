@@ -10,6 +10,9 @@
 
   --font-sans: var(--font-inter), sans-serif;
   --font-serif: var(--font-playfair), serif;
+  --font-llemwell: var(--font-llemwell), sans-serif; 
+  --font-llemwell-2: var(--font-llemwell-2), sans-serif; 
+  --font-llemwell-small: var(--font-llemwell-small), sans-serif; 
 }
 
 :root {
@@ -28,12 +31,18 @@ body {
 /* Base custom utilities for that premium feel */
 @layer utilities {
   .luxury-heading {
-    font-family: var(--font-playfair);
+    font-family: var(--font-llemwell);
     letter-spacing: -0.02em;
   }
 
   .luxury-subheading {
-    font-family: var(--font-sans);
+    font-family: var(--font-llemwell-2); 
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .luxury-subheading-small {
+    font-family: var(--font-llemwell-small); 
     letter-spacing: 0.15em;
     text-transform: uppercase;
   }
@@ -46,19 +55,19 @@ body {
 }
 
 /* Hide scrollbar for a cleaner look */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-luxury-black);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-luxury-gray);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-rolex-gold-dark);
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

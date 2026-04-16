@@ -8,4 +8,5 @@ export type Product = {
   description: string;
   material: string;
   buckle: string;
+  imageId: string;
 };

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing Calculator</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { box-sizing: border-box; }
+    .font-display { font-family: 'Instrument Serif', Georgia, serif; }
+    .font-body { font-family: 'DM Sans', sans-serif; }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 3px solid #1a1a1a;
+      background: #f0ebe3;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    input[type="range"]::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 3px solid #1a1a1a;
+      background: #f0ebe3;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+
+    .total-glow {
+      animation: pulse-glow 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(26,26,26,0.08); }
+      50% { box-shadow: 0 0 35px rgba(26,26,26,0.15); }
+    }
+
+    .fade-in { animation: fadeUp 0.5s ease forwards; opacity: 0; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .grain {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 50; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    .counter-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid #1a1a1a; background: transparent;
+      cursor: pointer; transition: all 0.15s; font-size: 18px; line-height: 1;
+      color: #1a1a1a; font-weight: 600;
+    }
+    .counter-btn:hover { background: #1a1a1a; color: #f0ebe3; }
+    .counter-btn:active { transform: scale(0.92); }
+
+    .album-chip {
+      padding: 8px 18px; border-radius: 999px; border: 2px solid #1a1a1a;
+      background: transparent; cursor: pointer; transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #1a1a1a;
+    }
+    .album-chip.active { background: #1a1a1a; color: #f0ebe3; }
+    .album-chip:hover:not(.active) { background: rgba(26,26,26,0.06); }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body" style="background:#f0ebe3; color:#1a1a1a;">
+  <div class="grain"></div>
+  <div id="app-wrapper" class="w-full h-full overflow-auto relative" style="z-index:1;"><!-- Header -->
+   <header class="text-center pt-10 pb-6 px-4 fade-in" style="animation-delay:0.05s;">
+    <div class="flex items-center justify-center gap-2 mb-3">
+     <div style="width:40px;height:2px;background:#1a1a1a;"></div><i data-lucide="aperture" style="width:20px;height:20px;"></i>
+     <div style="width:40px;height:2px;background:#1a1a1a;"></div>
+    </div>
+    <h1 id="business-name" class="font-display text-4xl sm:text-5xl md:text-6xl tracking-tight mb-2" style="font-style:italic;">Clarity Studio Photography</h1>
+    <p id="tagline" class="text-sm sm:text-base tracking-widest uppercase opacity-60">Craft your perfect package</p>
+   </header><!-- Calculator -->
+   <main class="max-w-5xl mx-auto px-4 pb-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8"><!-- Session Hours -->
+     <div class="card-hover rounded-2xl p-6 fade-in" style="background:#fff;animation-delay:0.15s;">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#1a1a1a;"><i data-lucide="camera" style="width:18px;height:18px;color:#f0ebe3;"></i>
+       </div>
+       <div>
+        <h2 class="font-display text-xl">Sessions</h2>
+        <p class="text-xs opacity-50">$150 – $250 / hour</p>
+       </div>
+      </div><label class="block text-xs uppercase tracking-wider opacity-50 mb-2">Hours</label>
+      <div class="flex items-center gap-4 mb-4"><button class="counter-btn" onclick="adjustHours(-1)">−</button> <span id="hours-val" class="text-3xl font-display" style="min-width:40px;text-align:center;">2</span> <button class="counter-btn" onclick="adjustHours(1)">+</button>
+      </div><label class="block text-xs uppercase tracking-wider opacity-50 mb-2">Rate: $<span id="rate-label">200</span>/hr</label> <input type="range" id="rate-slider" min="150" max="250" value="200" step="10" class="w-full" style="background:linear-gradient(to right,#1a1a1a 50%,#d4cfc7 50%);" oninput="updateRate(this)">
+      <div class="flex justify-between text-xs opacity-40 mt-1">
+       <span>$150</span><span>$250</span>
+      </div>
+      <div class="mt-5 pt-4" style="border-top:1px solid rgba(26,26,26,0.1);">
+       <div class="flex justify-between items-center"><span class="text-xs uppercase tracking-wider opacity-50">Subtotal</span> <span id="session-subtotal" class="text-xl font-display">$400</span>
+       </div>
+      </div>
+     </div><!-- Editing -->
+     <div class="card-hover rounded-2xl p-6 fade-in" style="background:#fff;animation-delay:0.25s;">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#1a1a1a;"><i data-lucide="image" style="width:18px;height:18px;color:#f0ebe3;"></i>
+       </div>
+       <div>
+        <h2 class="font-display text-xl">Editing</h2>
+        <p class="text-xs opacity-50">$50 / image</p>
+       </div>
+      </div><label class="block text-xs uppercase tracking-wider opacity-50 mb-2">Number of Images</label>
+      <div class="flex items-center gap-4 mb-2"><button class="counter-btn" onclick="adjustImages(-5)">−</button> <span id="images-val" class="text-3xl font-display" style="min-width:50px;text-align:center;">10</span> <button class="counter-btn" onclick="adjustImages(5)">+</button>
+      </div>
+      <p class="text-xs opacity-40 mb-4">Adjusts by 5</p>
+      <div class="grid grid-cols-5 gap-1 mb-4" id="image-dots"></div>
+      <div class="mt-auto pt-4" style="border-top:1px solid rgba(26,26,26,0.1);">
+       <div class="flex justify-between items-center"><span class="text-xs uppercase tracking-wider opacity-50">Subtotal</span> <span id="editing-subtotal" class="text-xl font-display">$500</span>
+       </div>
+      </div>
+     </div><!-- Albums -->
+     <div class="card-hover rounded-2xl p-6 fade-in" style="background:#fff;animation-delay:0.35s;">
+      <div class="flex items-center gap-3 mb-5">
+       <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#1a1a1a;"><i data-lucide="book-open" style="width:18px;height:18px;color:#f0ebe3;"></i>
+       </div>
+       <div>
+        <h2 class="font-display text-xl">Albums</h2>
+        <p class="text-xs opacity-50">$100 – $300 each</p>
+       </div>
+      </div><label class="block text-xs uppercase tracking-wider opacity-50 mb-3">Album Tier</label>
+      <div class="flex flex-wrap gap-2 mb-4"><button class="album-chip" data-tier="none" onclick="setAlbumTier('none',0)">None</button> <button class="album-chip active" data-tier="basic" onclick="setAlbumTier('basic',100)">Basic $100</button> <button class="album-chip" data-tier="premium" onclick="setAlbumTier('premium',200)">Premium $200</button> <button class="album-chip" data-tier="luxury" onclick="setAlbumTier('luxury',300)">Luxury $300</button>
+      </div><label class="block text-xs uppercase tracking-wider opacity-50 mb-2">Quantity</label>
+      <div class="flex items-center gap-4"><button class="counter-btn" onclick="adjustAlbums(-1)">−</button> <span id="albums-val" class="text-3xl font-display" style="min-width:40px;text-align:center;">1</span> <button class="counter-btn" onclick="adjustAlbums(1)">+</button>
+      </div>
+      <div class="mt-5 pt-4" style="border-top:1px solid rgba(26,26,26,0.1);">
+       <div class="flex justify-between items-center"><span class="text-xs uppercase tracking-wider opacity-50">Subtotal</span> <span id="album-subtotal" class="text-xl font-display">$100</span>
+       </div>
+      </div>
+     </div>
+    </div><!-- Total -->
+    <div class="total-glow rounded-2xl p-6 sm:p-8 text-center fade-in" style="background:#1a1a1a;color:#f0ebe3;animation-delay:0.45s;">
+     <p class="text-xs uppercase tracking-widest opacity-50 mb-1">Estimated Total</p>
+     <p id="grand-total" class="font-display text-5xl sm:text-6xl md:text-7xl" style="font-style:italic;">$1,000</p>
+     <div class="flex flex-wrap justify-center gap-4 mt-4 text-xs opacity-50"><span id="summary-sessions">2 hrs session</span> <span>•</span> <span id="summary-editing">10 edited images</span> <span>•</span> <span id="summary-albums">1 basic album</span>
+     </div>
+    </div>
+   </main>
+  </div>
+  <script>
+    // State
+    let hours = 2, rate = 200, images = 10, albumTier = 'basic', albumPrice = 100, albumQty = 1;
+
+    function adjustHours(d) { hours = Math.max(1, Math.min(12, hours + d)); document.getElementById('hours-val').textContent = hours; recalc(); }
+    function adjustImages(d) { images = Math.max(0, Math.min(100, images + d)); document.getElementById('images-val').textContent = images; renderDots(); recalc(); }
+    function adjustAlbums(d) { albumQty = Math.max(0, Math.min(10, albumQty + d)); document.getElementById('albums-val').textContent = albumQty; recalc(); }
+
+    function updateRate(el) {
+      rate = parseInt(el.value);
+      document.getElementById('rate-label').textContent = rate;
+      const pct = ((rate - 150) / 100) * 100;
+      el.style.background = `linear-gradient(to right,#1a1a1a ${pct}%,#d4cfc7 ${pct}%)`;
+      recalc();
+    }
+
+    function setAlbumTier(tier, price) {
+      albumTier = tier; albumPrice = price;
+      document.querySelectorAll('.album-chip').forEach(c => c.classList.toggle('active', c.dataset.tier === tier));
+      if (tier === 'none') { albumQty = 0; document.getElementById('albums-val').textContent = 0; }
+      else if (albumQty === 0) { albumQty = 1; document.getElementById('albums-val').textContent = 1; }
+      recalc();
+    }
+
+    function renderDots() {
+      const container = document.getElementById('image-dots');
+      const count = Math.min(images, 20);
+      container.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('div');
+        dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:#1a1a1a;opacity:0.3;transition:opacity 0.2s;';
+        dot.style.animationDelay = (i * 0.03) + 's';
+        container.appendChild(dot);
+      }
+      if (images > 20) {
+        const more = document.createElement('div');
+        more.style.cssText = 'font-size:10px;opacity:0.4;display:flex;align-items:center;';
+        more.textContent = `+${images - 20}`;
+        container.appendChild(more);
+      }
+    }
+
+    function recalc() {
+      const sSession = hours * rate;
+      const sEditing = images * 50;
+      const sAlbum = albumPrice * albumQty;
+      const total = sSession + sEditing + sAlbum;
+
+      document.getElementById('session-subtotal').textContent = '$' + sSession.toLocaleString();
+      document.getElementById('editing-subtotal').textContent = '$' + sEditing.toLocaleString();
+      document.getElementById('album-subtotal').textContent = '$' + sAlbum.toLocaleString();
+      document.getElementById('grand-total').textContent = '$' + total.toLocaleString();
+
+      document.getElementById('summary-sessions').textContent = hours + ' hr' + (hours > 1 ? 's' : '') + ' session';
+      document.getElementById('summary-editing').textContent = images + ' edited image' + (images !== 1 ? 's' : '');
+      document.getElementById('summary-albums').textContent = albumQty + ' ' + albumTier + ' album' + (albumQty !== 1 ? 's' : '');
+    }
+
+    renderDots();
+
+    // Element SDK
+    const defaultConfig = {
+      business_name: 'Clarity Studio Photography',
+      tagline: 'Craft your perfect package',
+      background_color: '#f0ebe3',
+      surface_color: '#ffffff',
+      text_color: '#1a1a1a',
+      accent_color: '#1a1a1a',
+      accent_text_color: '#f0ebe3',
+      font_family: 'Instrument Serif',
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      const bg = config.background_color || defaultConfig.background_color;
+      const surface = config.surface_color || defaultConfig.surface_color;
+      const text = config.text_color || defaultConfig.text_color;
+      const accent = config.accent_color || defaultConfig.accent_color;
+      const accentText = config.accent_text_color || defaultConfig.accent_text_color;
+      const font = config.font_family || defaultConfig.font_family;
+      const size = config.font_size || defaultConfig.font_size;
+
+      document.body.style.background = bg;
+      document.body.style.color = text;
+      document.getElementById('app-wrapper').style.color = text;
+
+      document.getElementById('business-name').textContent = config.business_name || defaultConfig.business_name;
+      document.getElementById('tagline').textContent = config.tagline || defaultConfig.tagline;
+
+      // Font
+      const displayStack = `${font}, Georgia, serif`;
+      const bodyStack = `DM Sans, ${font}, sans-serif`;
+      document.querySelectorAll('.font-display').forEach(el => el.style.fontFamily = displayStack);
+      document.querySelectorAll('h1, h2, [id$="-subtotal"], #grand-total, #hours-val, #images-val, #albums-val').forEach(el => el.style.fontFamily = displayStack);
+      document.body.style.fontFamily = bodyStack;
+
+      // Font size
+      document.body.style.fontSize = size + 'px';
+      const h1 = document.getElementById('business-name');
+      if (h1) h1.style.fontSize = (size * 3) + 'px';
+
+      // Cards
+      document.querySelectorAll('.card-hover').forEach(el => el.style.background = surface);
+
+      // Accent circles
+      document.querySelectorAll('.w-10.h-10.rounded-full').forEach(el => { el.style.background = accent; });
+      document.querySelectorAll('.w-10.h-10.rounded-full i').forEach(el => el.style.color = accentText);
+
+      // Total bar
+      const totalBar = document.querySelector('.total-glow');
+      if (totalBar) { totalBar.style.background = accent; totalBar.style.color = accentText; }
+
+      // Counter buttons
+      document.querySelectorAll('.counter-btn').forEach(el => { el.style.borderColor = text; el.style.color = text; });
+
+      // Album chips
+      document.querySelectorAll('.album-chip').forEach(el => {
+        el.style.borderColor = text; el.style.color = text;
+        if (el.classList.contains('active')) { el.style.background = accent; el.style.color = accentText; }
+        else { el.style.background = 'transparent'; }
+      });
+
+      // Slider thumb via CSS var workaround - update track
+      const slider = document.getElementById('rate-slider');
+      if (slider) {
+        const pct = ((rate - 150) / 100) * 100;
+        slider.style.background = `linear-gradient(to right,${text} ${pct}%,${bg === '#f0ebe3' ? '#d4cfc7' : surface} ${pct}%)`;
+      }
+
+      // Dots
+      document.querySelectorAll('#image-dots div').forEach(el => { if (!el.textContent) el.style.background = text; });
+
+      // Decorative lines
+      document.querySelectorAll('header div[style*="height:2px"]').forEach(el => el.style.background = text);
+    }
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => applyConfig(config),
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: v => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: v => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: v => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.accent_color || defaultConfig.accent_color, set: v => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
+          { get: () => config.accent_text_color || defaultConfig.accent_text_color, set: v => { config.accent_text_color = v; window.elementSdk.setConfig({ accent_text_color: v }); } },
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: v => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: v => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } },
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['business_name', config.business_name || defaultConfig.business_name],
+        ['tagline', config.tagline || defaultConfig.tagline],
+      ])
+    });
+
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e879cc27556ee6c',t:'MTc3NTU1MDAxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
