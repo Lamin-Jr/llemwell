@@ -1,50 +1,108 @@
-import Hero from '@/components/Hero';
-import Image from 'next/image';
-import Link from 'next/link';
+import SnapContainer from '@/components/sections/SnapContainer';
+import SnapSection from '@/components/sections/SnapSection';
+import HeroMedia from '@/components/sections/HeroMedia';
+import SplitContent from '@/components/sections/SplitContent';
+import HorizontalProductSlider from '@/components/sections/HorizontalProductSlider';
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
+  const sliderSlides = [
+    {
+      id: 1,
+      imageSrc: '/images/belt_hero.png',
+      imageAlt: 'Hardware Detail 1',
+      title: 'Forged to Endure',
+      subtitle: 'The Material',
+    },
+    {
+      id: 2,
+      imageSrc: '/images/belt_lifestyle.png',
+      imageAlt: 'Hardware Detail 2',
+      title: 'Scarred With Purpose',
+      subtitle: 'The Craft',
+    },
+    {
+      id: 3,
+      imageSrc: '/images/heroShowcase.jpg',
+      imageAlt: 'Raw Aesthetic',
+      title: 'Reject the Ordinary',
+      subtitle: 'The Statement',
+    },
+    // {
+    //   id: 4,
+    //   imageSrc: '/images/belt_hero.png',
+    //   imageAlt: 'Hardware Detail 1',
+    //   title: 'Forged to Endure',
+    //   subtitle: 'The Material',
+    // },
+    // {
+    //   id: 5,
+    //   imageSrc: '/images/heroShowcase.jpg',
+    //   imageAlt: 'Raw Aesthetic',
+    //   title: 'Reject the Ordinary',
+    //   subtitle: 'The Statement',
+    // }
+  ];
 
-      <section className="bg-white text-black py-32 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
-          <div className="w-full md:w-1/2 relative h-[600px]">
-            <Image
-              src="/images/belt_detail.png"
-              alt="LLEMWELL Craftsmanship"
-              fill
-              className="object-cover"
+  return (
+    <SnapContainer>
+      
+      {/* Unified Hero + Overlapping Slider Block */}
+      <div className="relative w-full z-0 flex flex-col">
+        {/* Sticky Hero Background */}
+        <div className=" top-0 h-screen w-full snap-start z-0 overflow-hidden">
+          <HeroMedia
+            imageSrc="/images/heroX1.jpg"
+            imageAlt="LLEMWELL Luxury Belt"
+            subheading="Uncompromising Craftsmanship"
+            heading="RAW OPIUM AESTHETIC"
+            overlayOpacity={40}
+          />
+        </div>
+        
+        {/* Slider overlapping the Hero on scroll */}
+        <div className="h-screen w-full snap-start relative z-10 flex items-end">
+          {/* Gradient to darken the hero behind the slider content */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent pointer-events-none" />
+          
+          <div className="relative z-20 w-full h-full">
+            <HorizontalProductSlider
+              heading="UNCOMPROMISING ASSETS"
+              subheading="The Collection"
+              slides={sliderSlides}
+              backgroundColor="bg-transparent"
             />
           </div>
-          <div className="w-full md:w-1/2">
-            <h3 className="luxury-subheading text-brand-secondary mb-4 text-sm font-bold">The Art of Rebellion</h3>
-            <h2 className="text-4xl md:text-6xl luxury-heading mb-8">Raw Opium Aesthetic</h2>
-            <p className="text-lg leading-relaxed text-gray-700 mb-8 font-serif">
-              Every LLEMWELL studded belt is a riot of craftsmanship. Forged from distressed calfskin leather and weaponized with heavy metal eyelets, silver spikes, and chunky vintage hardware. It is a pure embodiment of high-fashion grunge, designed for those who reject the ordinary.
-            </p>
-            <Link href="/product" className="inline-block border-b-2 border-brand-secondary pb-1 text-sm uppercase tracking-widest font-semibold hover:text-brand-secondary transition-colors">
-              Explore the Details
-            </Link>
-          </div>
         </div>
-      </section>
+      </div>
 
-      <section className="relative py-40 px-6 bg-[#BDC2C2] text-[#050505]">
-        <div className="absolute inset-0 opacity-70">
-           <Image src="/images/belt_lifestyle.png" alt="Lifestyle" fill className="object-cover object-top" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#BDC2C2] via-[#242424]/80 to-[#BDC2C2]" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl luxury-heading mb-8 text-slate-100 drop-shadow-xl">A Statement of Power</h2>
-            <p className="text-xl md:text-2xl font-serif text-slate-100 mb-12 drop-shadow-md">
-              Worn by the few who define the future.
-            </p>
-            <Link href="/contact" className="px-12 py-4 bg-brand-primary text-black uppercase tracking-[0.2em] font-semibold text-sm hover:bg-white transition-colors duration-300">
-              Request an Allocation
-            </Link>
-        </div>
-      </section>
-    </>
+      <SnapSection className="bg-white z-20 relative">
+        <SplitContent
+          imageSrc="/images/heroShowcase.jpg"
+          imageAlt="LLEMWELL Craftsmanship"
+          subheading="The Art of Rebellion"
+          heading="Redefine Boundaries"
+          description={"We did not create LLEMWELL to follow trends. We created it to build armor.\n\nA true collision of high-fashion precision and reckless underground energy. Every LLEMWELL studded belt is a riot of craftsmanship. Forged from distressed calfskin leather and weaponized with heavy metal eyelets, silver spikes, and chunky vintage hardware."}
+          ctaText="Explore the Details"
+          ctaLink="/product"
+          reverse={false}
+          backgroundColor="bg-transparent" // Replaced to transparent to use section bg
+          textColor="text-black"
+        />
+      </SnapSection>
+
+      <SnapSection className="z-20 relative">
+        <HeroMedia
+          imageSrc="/images/heroX1.jpg" 
+          imageAlt="A Statement of Power"
+          heading="A Statement of Power"
+          subheading="Worn by the few who define the future"
+          ctaText="Request an Allocation"
+          ctaLink="/contact"
+          overlayOpacity={60}
+          align="center"
+        />
+      </SnapSection>
+      
+    </SnapContainer>
   );
 }

@@ -1,9 +1,14 @@
-@tailwind base;
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 :root {
-  --gold: #a37e2c;
+  --gold: #a37e2c; 
 }
 
 body {
