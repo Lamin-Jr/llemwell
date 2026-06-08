@@ -3,28 +3,41 @@ import { Product } from './types';
 export const products: Product[] = [
   {
     id: 1,
-    slug: 'opium-carti-studded-belt',
-    name: 'Vampire Studded Leather Belt',
+    slug: 'DRAGONFLY-V1',
+    name: 'DRAGONFLY-V1 LEATHER BELT',
     price: 850,
     image: '/images/belt_hero.png',
     images: ['/images/belt_hero.png', '/images/belt_detail.png', '/images/belt_lifestyle.png'],
     description:
-      'A true piece of high-fashion grunge. Crafted from distressed black calfskin leather, fortified with heavy metal eyelets, silver spikes, and chunky vintage hardware. Designed for the raw, unapologetic Opium aesthetic.',
+      'A true piece of high-fashion grunge. Crafted from distressed black calfskin leather, fortified with heavy metal eyelets, silver spikes, and chunky vintage hardware. Designed for the raw, unapologetic aesthetic.',
     material: 'Distressed Black Calfskin',
     buckle: 'Heavy Silver-toned Metal',
-    imageId: 'GB-1'
+    imageId: 'GB-1',
   },
   {
     id: 2,
-    slug: 'opium-carti-studded-belt',
-    name: 'Vampire Studded Leather Belt',
+    slug: 'phantom-chain-belt',
+    name: 'Phantom Chain Leather Belt',
     price: 650,
-    image: '/images/belt_hero.png',
-    images: ['/images/belt_hero.png', '/images/belt_detail.png', '/images/belt_lifestyle.png'],
+    image: '/images/belt_lifestyle.png',
+    images: ['/images/belt_lifestyle.png', '/images/belt_detail.png', '/images/belt_hero.png'],
     description:
-      'A true piece of high-fashion grunge. Crafted from distressed black calfskin leather, fortified with heavy metal eyelets, silver spikes, and chunky vintage hardware. Designed for the raw, unapologetic Opium aesthetic.',
-    material: 'Distressed Black Calfskin',
-    buckle: 'Heavy Silver-toned Metal',
-    imageId: 'GB-1'
+      'Industrial elegance redefined. Hand-stitched from aged calfskin with oxidized chain links and a vintage clasp mechanism. Each belt develops its own unique patina over time.',
+    material: 'Aged Black Calfskin',
+    buckle: 'Oxidized Chain-link Metal',
+    imageId: 'GB-2',
+  },
+  {
+    id: 3,
+    slug: 'nocturne-eyelet-belt',
+    name: 'Nocturne Eyelet Belt',
+    price: 720,
+    image: '/images/belt_detail.png',
+    images: ['/images/belt_detail.png', '/images/belt_hero.png', '/images/belt_lifestyle.png'],
+    description:
+      'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
+    material: 'Distressed Charcoal Calfskin',
+    buckle: 'Gunmetal Square Buckle',
+    imageId: 'GB-3',
   },
 ];

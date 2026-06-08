@@ -1,7 +1,10 @@
 'use client';
+
 import { useState } from 'react';
 import { submitContactForm } from '../actions';
-import { CheckCircle2, ChevronRight, MapPin, Phone } from 'lucide-react';
+import HeroMedia from '@/components/sections/HeroMedia';
+import ScrollReveal from '@/components/ui/ScrollReveal';
+import GhostButton from '@/components/ui/GhostButton';
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
@@ -25,110 +28,207 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="bg-[#BDC2C2] min-h-screen text-[#050505] pt-32 pb-24">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20">
+    <main>
+      {/* 1. Hero */}
+      <HeroMedia
+        imageSrc="/images/heroShowcase.jpg"
+        imageAlt="LLEMWELL Client Care"
+        heading="Client Care"
+        subheading="Boutique Inquiries"
+        overlayOpacity={60}
+        align="center"
+      />
 
-        {/* Left: Contact Info */}
-        <div className="flex flex-col justify-center">
-          <h2 className="text-brand-primary uppercase tracking-[0.2em] font-semibold text-xs mb-4">Client Care</h2>
-          <h1 className="text-5xl luxury-heading mb-8">Boutique Inquiries</h1>
-          <p className="text-[#050505]/70 font-serif text-lg leading-relaxed mb-12">
-            LLEMWELL provides a dedicated white-glove service for our clients. Whether you wish to request an allocation, inquire about bespoke sizing, or arrange a private viewing in Milano.
-          </p>
+      {/* 2. Contact Content */}
+      <section className="section-padding">
+        <div className="container-luxury">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
+            {/* LEFT: Contact Info */}
+            <div className="flex flex-col justify-center">
+              <ScrollReveal direction="up">
+                <p className="luxury-subheading text-accent-warm mb-4">
+                  Get in Touch
+                </p>
+                <h2 className="luxury-heading text-text-primary text-3xl md:text-4xl mt-4">
+                  We are Here for You
+                </h2>
+                <p className="body-serif text-text-secondary mt-6 leading-relaxed">
+                  LLEMWELL provides a dedicated white-glove service for our
+                  clients. Whether you wish to request an allocation, inquire
+                  about bespoke sizing, or arrange a private viewing.
+                </p>
 
-          <div className="space-y-8">
-            <div className="flex items-start gap-4">
-              <MapPin className="text-brand-primary shrink-0 mt-1" size={24} />
-              <div>
-                <h3 className="font-semibold uppercase tracking-widest text-sm mb-2">Headquarters</h3>
-                <p className="text-[#050505]/70 font-serif">Nolo District<br />000 Milano, Italy</p>
-              </div>
+                {/* Contact Details */}
+                <div className="mt-12 space-y-8">
+                  <div>
+                    <p className="luxury-caption text-text-tertiary">
+                      Headquarters
+                    </p>
+                    <p className="text-text-primary text-sm mt-2">
+                      Nolo District, Milano, Italy
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="luxury-caption text-text-tertiary">
+                      Concierge
+                    </p>
+                    <p className="text-text-primary text-sm mt-2">
+                      +39 30 000 00 00
+                    </p>
+                    <p className="text-text-primary text-sm mt-1">
+                      contact@llemwell.com
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
             </div>
 
-            <div className="flex items-start gap-4">
-              <Phone className="text-brand-primary shrink-0 mt-1" size={24} />
-              <div>
-                <h3 className="font-semibold uppercase tracking-widest text-sm mb-2">Concierge</h3>
-                <p className="text-[#050505]/70 font-serif">+39 30 000 00 00<br />contact@llemwell.com</p>
-              </div>
+            {/* RIGHT: Form */}
+            <div
+              className="p-8 md:p-12"
+              style={{
+                backgroundColor: 'var(--color-surface-secondary)',
+                border: '1px solid var(--border-subtle)',
+              }}
+            >
+              {success ? (
+                <div className="h-full flex flex-col items-center justify-center text-center space-y-6 py-20">
+                  <h2 className="luxury-heading text-text-primary text-3xl">
+                    Inquiry Received
+                  </h2>
+                  <p className="body-serif text-text-secondary">
+                    Our concierge will contact you within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  {error && (
+                    <div className="text-red-400 text-sm mt-2">{error}</div>
+                  )}
+
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="luxury-caption text-text-tertiary block mb-2"
+                    >
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full bg-transparent border-b py-3 text-base font-sans text-text-primary outline-none transition-colors duration-300"
+                      style={{
+                        borderColor: 'var(--border-subtle)',
+                      }}
+                      onFocus={(e) =>
+                        (e.currentTarget.style.borderColor =
+                          'var(--border-strong)')
+                      }
+                      onBlur={(e) =>
+                        (e.currentTarget.style.borderColor =
+                          'var(--border-subtle)')
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="luxury-caption text-text-tertiary block mb-2"
+                    >
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full bg-transparent border-b py-3 text-base font-sans text-text-primary outline-none transition-colors duration-300"
+                      style={{
+                        borderColor: 'var(--border-subtle)',
+                      }}
+                      onFocus={(e) =>
+                        (e.currentTarget.style.borderColor =
+                          'var(--border-strong)')
+                      }
+                      onBlur={(e) =>
+                        (e.currentTarget.style.borderColor =
+                          'var(--border-subtle)')
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="luxury-caption text-text-tertiary block mb-2"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      className="w-full bg-transparent border-b py-3 text-base font-sans text-text-primary outline-none transition-colors duration-300"
+                      style={{
+                        borderColor: 'var(--border-subtle)',
+                      }}
+                      onFocus={(e) =>
+                        (e.currentTarget.style.borderColor =
+                          'var(--border-strong)')
+                      }
+                      onBlur={(e) =>
+                        (e.currentTarget.style.borderColor =
+                          'var(--border-subtle)')
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="inquiry"
+                      className="luxury-caption text-text-tertiary block mb-2"
+                    >
+                      Your Inquiry *
+                    </label>
+                    <textarea
+                      id="inquiry"
+                      name="inquiry"
+                      required
+                      rows={4}
+                      className="w-full bg-transparent border-b py-3 text-base font-sans text-text-primary outline-none transition-colors duration-300 resize-none"
+                      style={{
+                        borderColor: 'var(--border-subtle)',
+                      }}
+                      onFocus={(e) =>
+                        (e.currentTarget.style.borderColor =
+                          'var(--border-strong)')
+                      }
+                      onBlur={(e) =>
+                        (e.currentTarget.style.borderColor =
+                          'var(--border-subtle)')
+                      }
+                    />
+                  </div>
+
+                  <GhostButton
+                    type="submit"
+                    size="lg"
+                    className="w-full"
+                    disabled={loading}
+                    loading={loading}
+                  >
+                    {loading ? 'Submitting...' : 'Send Inquiry'}
+                  </GhostButton>
+                </form>
+              )}
             </div>
           </div>
         </div>
-
-        {/* Right: The Form */}
-        <div className="bg-[#A6A096] border border-black/10 p-8 md:p-12">
-          {success ? (
-            <div className="h-full flex flex-col items-center justify-center text-center space-y-6 py-20">
-              <CheckCircle2 size={64} className="text-brand-primary" />
-              <h2 className="text-3xl luxury-heading text-[#050505]">Inquiry Received</h2>
-              <p className="text-[#050505]/70 font-serif text-lg">
-                Our concierge will contact you within 24 hours.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
-              {error && (
-                <div className="bg-red-900/30 border border-red-500/50 text-red-200 p-4 text-sm font-serif">
-                  {error}
-                </div>
-              )}
-
-              <div className="space-y-2">
-                <label htmlFor="name" className="block text-xs uppercase tracking-widest text-[#050505]/70">Full Name *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full bg-transparent border-b border-black/20 focus:border-brand-primary outline-none py-2 text-lg font-serif transition-colors text-[#050505]"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="email" className="block text-xs uppercase tracking-widest text-[#050505]/70">Email Address *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full bg-transparent border-b border-black/20 focus:border-brand-primary outline-none py-2 text-lg font-serif transition-colors text-[#050505]"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="phone" className="block text-xs uppercase tracking-widest text-[#050505]/70">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  className="w-full bg-transparent border-b border-black/20 focus:border-brand-primary outline-none py-2 text-lg font-serif transition-colors text-[#050505]"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="inquiry" className="block text-xs uppercase tracking-widest text-[#050505]/70">Your Inquiry *</label>
-                <textarea
-                  id="inquiry"
-                  name="inquiry"
-                  required
-                  rows={4}
-                  className="w-full bg-transparent border-b border-black/20 focus:border-brand-primary outline-none py-2 text-lg font-serif transition-colors resize-none text-[#050505]"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-4 bg-brand-primary text-black uppercase tracking-[0.2em] font-bold text-sm hover:bg-white transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? 'Submitting...' : 'Send Inquiry'}
-                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </form>
-          )}
-        </div>
-
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
