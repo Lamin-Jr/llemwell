@@ -31,7 +31,7 @@ export default function ContactPage() {
     <main>
       {/* 1. Hero */}
       <HeroMedia
-        imageSrc="/images/heroShowcase.jpg"
+        imageSrc="/design_content/hero_tag_2.jpg.jpeg"
         imageAlt="LLEMWELL Client Care"
         heading="Client Care"
         subheading="Boutique Inquiries"

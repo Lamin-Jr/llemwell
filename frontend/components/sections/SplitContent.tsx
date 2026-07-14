@@ -15,12 +15,14 @@ interface SplitContentProps {
   ctaLink?: string;
   reverse?: boolean;
   className?: string;
+  sizes?:string;
 }
 
 export default function SplitContent({
   imageSrc,
   imageAlt,
   imageClass = '',
+  sizes,
   subheading,
   heading,
   description,
@@ -48,6 +50,7 @@ export default function SplitContent({
             <Image
               src={imageSrc}
               alt={imageAlt}
+              sizes={sizes}
               fill
               className={`object-cover ${imageClass}`}
             />

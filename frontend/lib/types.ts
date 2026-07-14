@@ -10,3 +10,12 @@ export type Product = {
   buckle: string;
   imageId: string;
 };
+
+export type Collection = {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  productIds: number[];
+  image: string;
+};

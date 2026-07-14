@@ -60,7 +60,7 @@ export default function SingleProduct() {
                       onClick={() => setCurrentImage(i)}
                       className={`flex-1 aspect-video relative overflow-hidden border-2 transition-all duration-300 ${
                         i === currentImage
-                          ? 'border-[var(--border-strong)]'
+                          ? 'border-(--border-strong)'
                           : 'border-transparent'
                       }`}
                     >

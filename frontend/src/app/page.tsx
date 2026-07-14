@@ -10,11 +10,11 @@ export default function Home() {
     <main>
       {/* 1. Cinematic Hero */}
       <HeroMedia
-        imageSrc="/product-images/dragon-fly-belt-hero-x1.png"
+        imageSrc="/design_content/hero_tag_1.jpg.jpeg"
         imageAlt="LLEMWELL Luxury Belt"
-        subheading="Uncompromising Craftsmanship"
-        heading="LLEMWELL"
-        ctaText="Discover the Collection"
+        // subheading="Uncompromising Craftsmanship"
+        heading=""
+        // ctaText="Discover the Collection"
         ctaLink="/products"
         showScrollIndicator={true}
         overlayOpacity={50}
@@ -56,7 +56,7 @@ export default function Home() {
               Explore Our Pieces
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
