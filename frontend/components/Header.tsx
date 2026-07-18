@@ -272,7 +272,7 @@ export default function Header() {
             aria-label="Open navigation menu"
           >
             <Menu
-              size={40}
+              size={25}
               strokeWidth={1.5}
               className="transition-opacity duration-300 group-hover:opacity-100 opacity-80"
             />
