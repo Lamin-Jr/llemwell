@@ -1,60 +1,303 @@
 @import 'tailwindcss';
 
+/* ═══════════════════════════════════════════════════════
+   LLEMWELL — Design System Tokens
+   Dark Drangon Fire ashes 
+   ═══════════════════════════════════════════════════════ */
+
 @theme inline {
-  --color-brand-primary: #BADADF;
-  --color-brand-secondary: #A6A096;
+  /* ── SURFACES ── */
+  --color-surface-primary:    #0A0A0A;
+  --color-surface-secondary:  #111111;
+  --color-surface-tertiary:   #1A1A1A;
+  --color-surface-elevated:   #1E1E1E;
 
-  --color-luxury-black: #050505;
-  --color-luxury-charcoal: #121212;
-  --color-luxury-gray: #242424;
+  /* ── TEXT ── */
+  --color-text-primary:       #F5F5F0;
+  --color-text-secondary:     #8A8A85;
+  --color-text-tertiary:      #555550;
 
-  --font-sans: var(--font-inter), sans-serif;
-  --font-serif: var(--font-playfair), serif;
+  /* ── ACCENTS ── */
+  --color-accent-primary:     #BADADF;
+  --color-accent-warm:        #A6A096;
+
+  /* ── FUNCTIONAL ── */
+  --color-success:            #4A7A5A;
+  --color-error:              #8A3A3A;
+
+  /* ── FONT FAMILIES ── */
+  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --font-brand: var(--font-llemwell), sans-serif;
+  /* --font-brand-alt: var(--font-llemwell-2), sans-serif; */
   --font-llemwell: var(--font-llemwell), sans-serif; 
-  --font-llemwell-2: var(--font-llemwell-2), sans-serif; 
   --font-llemwell-small: var(--font-llemwell-small), sans-serif; 
 }
 
+/* ═══════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES
+   ═══════════════════════════════════════════════════════ */
+
 :root {
-  --background: #BDC2C2;
-  --foreground: #050505;
+  /* ── Surfaces ── */
+  --background:          #0A0A0A;
+  --foreground:          #F5F5F0;
+
+  /* ── Borders ── */
+  --border-subtle:       rgba(245, 245, 240, 0.08);
+  --border-medium:       rgba(245, 245, 240, 0.20);
+  --border-strong:       rgba(245, 245, 240, 0.40);
+
+  /* ── Typography Scale (fluid) ── */
+  --text-hero:           clamp(3rem, 8vw, 6rem);
+  --text-display:        clamp(2rem, 5vw, 3.5rem);
+  --text-heading:        clamp(1.5rem, 3vw, 2.25rem);
+  --text-subheading:     clamp(0.6875rem, 1vw, 0.8125rem);
+  --text-body:           clamp(0.9375rem, 1.1vw, 1.125rem);
+  --text-caption:        clamp(0.625rem, 0.8vw, 0.75rem);
+
+  /* ── Font Weights ── */
+  --weight-light:        300;
+  --weight-regular:      400;
+  --weight-medium:       500;
+  --weight-semibold:     600;
+
+  /* ── Letter Spacing ── */
+  --tracking-tight:      -0.02em;
+  --tracking-normal:     0;
+  --tracking-wide:       0.15em;
+  --tracking-wider:      0.25em;
+
+  /* ── Line Height ── */
+  --leading-tight:       1.1;
+  --leading-normal:      1.6;
+  --leading-relaxed:     1.8;
+
+  /* ── Spacing ── */
+  --section-gap:         clamp(5rem, 10vw, 10rem);
+  --content-gap:         clamp(2rem, 4vw, 4rem);
+  --element-gap:         clamp(1rem, 2vw, 2rem);
+  --container-padding:   clamp(1.5rem, 5vw, 6rem);
+
+  /* ── Container Widths ── */
+  --width-narrow:        640px;
+  --width-medium:        960px;
+  --width-wide:          1200px;
+  --width-max:           1400px;
+
+  /* ── Motion ── */
+  --duration-fast:       300ms;
+  --duration-normal:     600ms;
+  --duration-slow:       1000ms;
+  --duration-glacial:    1500ms;
+
+  --ease-out:            cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:         cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-luxury:         cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ── Scroll Reveal ── */
+  --reveal-translate:    40px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Base custom utilities for that premium feel */
+::selection {
+  background: var(--color-accent-primary);
+  color: var(--background);
+}
+
+/* ═══════════════════════════════════════════════════════
+   TYPOGRAPHY UTILITIES
+   ═══════════════════════════════════════════════════════ */
+
 @layer utilities {
+  /* Brand heading — main display font */
   .luxury-heading {
-    font-family: var(--font-llemwell);
-    letter-spacing: -0.02em;
+    font-family: var(--font-brand);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    font-weight: var(--weight-light);
   }
 
+  /* Brand subheading — tracked uppercase */
   .luxury-subheading {
-    font-family: var(--font-llemwell-2); 
-    letter-spacing: 0.15em;
+    font-family: var(--font-brand-alt);
+    letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
+    font-weight: var(--weight-regular);
+    font-size: var(--text-subheading);
+    color: var(--color-text-secondary);
   }
 
-  .luxury-subheading-small {
-    font-family: var(--font-llemwell-small); 
-    letter-spacing: 0.15em;
+  /* Brand small — labels and captions */
+  .luxury-caption {
+    font-family: var(--font-brand-small);
+    letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
+    font-weight: var(--weight-regular);
+    font-size: var(--text-caption);
+    color: var(--color-text-tertiary);
   }
 
+  /* Body serif — for descriptive paragraphs */
+  .body-serif {
+    font-family: var(--font-serif);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-relaxed);
+    font-size: var(--text-body);
+  }
+
+  /* ── Glass Header ── */
   .glass-header {
-    background: rgba(5, 5, 5, 0.75);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(10, 10, 10, 0.80);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  /* ── Ghost Button Base ── */
+  .ghost-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-medium);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--foreground);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-weight: var(--weight-regular);
+    font-size: var(--text-caption);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-luxury),
+                background var(--duration-fast) var(--ease-luxury),
+                color var(--duration-fast) var(--ease-luxury);
+  }
+
+  .ghost-btn:hover {
+    border-color: var(--border-strong);
+  }
+
+  .ghost-btn:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+  }
+
+  .ghost-btn-sm {
+    padding: 0.5rem 1.5rem;
+    font-size: var(--text-caption);
+  }
+
+  .ghost-btn-md {
+    padding: 0.875rem 2.5rem;
+    font-size: var(--text-caption);
+  }
+
+  .ghost-btn-lg {
+    padding: 1.125rem 3rem;
+    font-size: var(--text-subheading);
+  }
+
+  /* Dark variant — for light backgrounds */
+  .ghost-btn-dark {
+    border-color: rgba(10, 10, 10, 0.25);
+    color: var(--background);
+  }
+  .ghost-btn-dark:hover {
+    border-color: rgba(10, 10, 10, 0.5);
+  }
+
+  /* ── Container ── */
+  .container-luxury {
+    width: 100%;
+    max-width: var(--width-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: var(--width-narrow);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+
+  /* ── Section Spacing ── */
+  .section-padding {
+    padding-top: var(--section-gap);
+    padding-bottom: var(--section-gap);
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    width: 100%;
   }
 }
 
-/* Hide scrollbar for a cleaner look */
+/* ═══════════════════════════════════════════════════════
+   SCROLL REVEAL ANIMATIONS
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-translate));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateY(8px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLLBAR HIDDEN
+   ═══════════════════════════════════════════════════════ */
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -68,6 +311,51 @@ body {
 }
 
 body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ═══════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════════════════════ */
+
+/* Skip navigation link */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-accent-primary);
+  color: var(--background);
+  font-size: 0.875rem;
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  z-index: 9999;
+  transition: top var(--duration-fast) var(--ease-out);
+}
+
+.skip-nav:focus {
+  top: 1rem;
+}
+
+/* Focus visible styling */
+*:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

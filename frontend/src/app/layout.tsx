@@ -1,28 +1,33 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
-import localFont from 'next/font/local'; 
+import localFont from 'next/font/local';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+/* ═══════════════════════════════════════════════════════
+   FONT LOADING — LLEMWELL Brand Fonts
+   ═══════════════════════════════════════════════════════ */
+
 const llemwellFont = localFont({
-  src: './fonts/llemwell.otf', // Point at the main
+  src: './fonts/llemwell_2.otf',
   variable: '--font-llemwell',
-  display: 'swap',
+  display: "auto",
 });
 
-//Second font
-const llemwell_2_Font = localFont({
-  src: './fonts/llemwell.otf', // Point this at second font
-  variable: '--font-llemwell-2',
-  display: 'swap',
-});
+// const llemwell2Font = localFont({
+//   src: './fonts/llemwell_2.otf',
+//   variable: '--font-llemwell-2',
+//   display: 'swap',
+// });
 
-const llemwell_Small_Font = localFont({
-  src: './fonts/llemwell.otf', // Point at small font
+const llemwellSmallFont = localFont({
+  src: './fonts/llemwell_small.otf',
   variable: '--font-llemwell-small',
-  display: 'swap',
+  display: 'auto',
 });
+
+/* ── Google Fonts ── */
 
 const inter = Inter({
   variable: '--font-inter',
@@ -36,10 +41,25 @@ const playfair = Playfair_Display({
   display: 'swap',
 });
 
+/* ═══════════════════════════════════════════════════════
+   METADATA
+   ═══════════════════════════════════════════════════════ */
+
 export const metadata: Metadata = {
-  title: 'LLEMWELL | The Pinnacle of your fav Accesories',
-  description: 'Discover the LLEMWELL Belt. A masterpiece of modern craftsmanship forged from solid gold and aerospace-grade steel.',
+  title: 'LLEMWELL | Handcrafted Belts',
+  description:
+    'Discover LLEMWELL — handcrafted luxury belts forged from distressed calfskin and heavy metal hardware. Uncompromising craftsmanship for the bold.',
+  keywords: ['LLEMWELL', 'luxury belts', 'handcrafted leather', 'designer belts', 'studded belt'],
+  openGraph: {
+    title: 'LLEMWELL | Handcrafted Italian Made Belts',
+    description: 'Handcrafted luxury belts forged from distressed calfskin and heavy metal hardware.',
+    type: 'website',
+  },
 };
+
+/* ═══════════════════════════════════════════════════════
+   ROOT LAYOUT
+   ═══════════════════════════════════════════════════════ */
 
 export default function RootLayout({
   children,
@@ -47,15 +67,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
-      <body className={`${inter.variable} ${playfair.variable} ${llemwellFont.variable} ${llemwell_2_Font.variable} ${llemwell_Small_Font.variable} antialiased bg-[#BDC2C2] text-[#050505] min-h-screen selection:bg-brand-primary selection:text-black flex flex-col`}>
+    <html lang="en" className="dark">
+      <body
+        className={`
+          ${inter.variable} 
+          ${playfair.variable} 
+          ${llemwellFont.variable} 
+          ${llemwellSmallFont.variable} 
+          antialiased 
+          min-h-screen 
+          flex 
+          flex-col
+        `}
+      >
+        {/* Skip Navigation — Accessibility */}
+        <a href="#main-content" className="skip-nav">
+          Skip to main content
+        </a>
+
         <Header />
-        <main className="flex-grow pt-20">
+
+        <main id="main-content" className="flex-grow">
           {children}
         </main>
+
         <Footer />
       </body>
     </html>
   );
 }
-

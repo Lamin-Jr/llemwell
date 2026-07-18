@@ -14,6 +14,8 @@ export async function submitContactForm(formData: FormData) {
     const phone = formData.get('phone') as string | null;
     const inquiry = formData.get('inquiry') as string;
 
+  
+
     if (!name || !email || !inquiry) {
       return { success: false, error: 'Name, Email, and Inquiry are required.' };
     }
@@ -28,6 +30,20 @@ export async function submitContactForm(formData: FormData) {
     });
 
     return { success: true, messageId: message.id };
+
+    // switch (true) {
+    //   case !name: 
+    //   return { success: false, error: "Name is Required" };
+    //   case !email: 
+    //   return { success: false, error: "Email is Required" };
+    //   case !phone: 
+    //   return { success: false, error: "Email is Required" };
+    //   case !inquiry: 
+    //   return { success: false, error: "Email is Required" };
+    //   default: 
+    //   return {success: false, error: "Please Fill the form"}
+      
+    // }
   } catch (error) {
     console.error('Error submitting contact form:', error);
     return { success: false, error: 'Failed to submit the form. Please try again later.' };

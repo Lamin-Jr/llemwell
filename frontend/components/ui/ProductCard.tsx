@@ -1,20 +1,37 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from '@/lib/types';
 
-export default function ProductCard({ product }: { product: Product }) {
+interface ProductCardProps {
+  product: Product;
+}
+
+export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link href={`/products/${product.slug}`} className="group block">
-      <div className="relative overflow-hidden bg-black aspect-[4/3]">
-        <img
+    <Link href={`/products/${product.slug}`} className="group block bg-surface-secondary">
+      {/* Image */}
+      <div className="relative overflow-hidden aspect-3/4">
+        <Image
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
       </div>
-      <div className="mt-6">
-        <h3 className="text-xl luxury-heading">{product.name}</h3>
-        <p className="text-lg mt-1">€{product.price}</p>
+
+      {/* Text Content */}
+      <div className="p-6">
+        <h3 className="luxury-heading text-lg text-text-primary">
+          {product.name}
+        </h3>
+        <p className="text-text-secondary text-sm mt-1">
+          €{product.price}
+        </p>
+        <span className="luxury-caption text-text-tertiary hover:text-text-primary underline underline-offset-4 transition-colors duration-300 inline-block mt-4">
+          Discover
+        </span>
       </div>
     </Link>
   );
