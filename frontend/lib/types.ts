@@ -9,6 +9,8 @@ export type Product = {
   material: string;
   buckle: string;
   imageId: string;
+  status?: "draft" | "pending" | "live";
+  collectionId?: number | null;
 };
 
 export type Collection = {
