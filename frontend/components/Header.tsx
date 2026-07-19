@@ -166,6 +166,7 @@ function SubmenuContent({ onClose }: { onClose: () => void }) {
                     style={{ color: 'var(--color-text-tertiary)' }}
                   >
                     €{product.price.toLocaleString()}
+                    
                   </p>
                 </div>
                 <span
@@ -272,7 +273,7 @@ export default function Header() {
             aria-label="Open navigation menu"
           >
             <Menu
-              size={25}
+              size={30}
               strokeWidth={1.5}
               className="transition-opacity duration-300 group-hover:opacity-100 opacity-80"
             />
