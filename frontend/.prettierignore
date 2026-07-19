@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+
+# Next.js build output
+.next
+out
+
+# Production files
+dist
+build
+
+# Docker & env
+.docker
+.env
+.env.local
+.env.*.local
+
+# Generated files
+*.min.js
+*.min.css
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE & OS
+.DS_Store
+.vscode
+.idea
