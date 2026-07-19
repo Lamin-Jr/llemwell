@@ -1,0 +1,25 @@
+/* [project]/src/app/llemwellsmallfont_c83dae0b.module.css [app-client] (css) */
+@font-face {
+  font-family: llemwellSmallFont;
+  src: url("../media/llemwell_small-s.p.b3509883.otf") format("opentype");
+  font-display: auto;
+}
+
+@font-face {
+  font-family: llemwellSmallFont Fallback;
+  src: local(Arial);
+  ascent-override: 80.0%;
+  descent-override: 20.1%;
+  line-gap-override: 9.0%;
+  size-adjust: 100.0%;
+}
+
+.llemwellsmallfont_c83dae0b-module__HzzrNa__className {
+  font-family: llemwellSmallFont, llemwellSmallFont Fallback;
+}
+
+.llemwellsmallfont_c83dae0b-module__HzzrNa__variable {
+  --font-llemwell-small: "llemwellSmallFont", "llemwellSmallFont Fallback";
+}
+
+/*# sourceMappingURL=src_app_llemwellsmallfont_c83dae0b_module_css_bad6b30c._.single.css.map*/
