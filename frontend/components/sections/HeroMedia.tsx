@@ -73,7 +73,7 @@ export default function HeroMedia({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5 }}
           className="luxury-heading text-text-primary mb-8"
-          style={{ fontSize: 'var(--text-hero)' }}
+          style={{ fontSize: "5.5rem", fontWeight: "var(--weight-light)" }}
         >
           {heading}
         </motion.h1>
