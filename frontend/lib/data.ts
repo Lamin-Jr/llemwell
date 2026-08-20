@@ -1,4 +1,4 @@
-import { Product } from './types';
+import { Product } from './types/types';
 
 export const products: Product[] = [
   {
@@ -7,7 +7,11 @@ export const products: Product[] = [
     name: 'DRAGONFLY-V1 LEATHER BELT',
     price: 850,
     image: '/product-images/dragon-fly-model-x2.png',
-    images: ['/product-images/dragon-fly-model-x4.png', '/images/belt_detail.png', '/images/belt_lifestyle.png'],
+    images: [
+      '/product-images/dragon-fly-model-x4.png',
+      '/images/belt_detail.png',
+      '/images/belt_lifestyle.png',
+    ],
     description:
       'A true piece of high-fashion grunge. Crafted from distressed black calfskin leather, fortified with heavy metal eyelets, silver spikes, and chunky vintage hardware. Designed for the raw, unapologetic aesthetic.',
     material: 'Distressed Black Calfskin',
@@ -27,12 +31,25 @@ export const products: Product[] = [
     buckle: 'Oxidized Chain-link Metal',
     imageId: 'GB-2',
   },
+  // {
+  //   id: 3,
+  //   slug: 'nocturne-eyelet-belt',
+  //   name: 'Nocturne Eyelet Belt',
+  //   price: 720,
+  //   image: '/images/belt_detail.png',
+  //   images: ['/images/belt_detail.png', '/images/belt_hero.png', '/images/belt_lifestyle.png'],
+  //   description:
+  //     'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
+  //   material: 'Distressed Charcoal Calfskin',
+  //   buckle: 'Gunmetal Square Buckle',
+  //   imageId: 'GB-3',
+  // },
   {
     id: 3,
     slug: 'nocturne-eyelet-belt',
     name: 'Nocturne Eyelet Belt',
-    price: 720,
-    image: '/images/belt_detail.png',
+    price: 220,
+    image: '/product-images/dragon-fly-model-x1.png',
     images: ['/images/belt_detail.png', '/images/belt_hero.png', '/images/belt_lifestyle.png'],
     description:
       'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
@@ -40,30 +57,17 @@ export const products: Product[] = [
     buckle: 'Gunmetal Square Buckle',
     imageId: 'GB-3',
   },
-    {
-      id: 4,
-      slug: 'nocturne-eyelet-belt',
-      name: 'Nocturne Eyelet Belt',
-      price: 220,
-      image: '/product-images/dragon-fly-model-x1.png',
-      images: ['/images/belt_detail.png', '/images/belt_hero.png', '/images/belt_lifestyle.png'],
-      description:
-        'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
-      material: 'Distressed Charcoal Calfskin',
-      buckle: 'Gunmetal Square Buckle',
-      imageId: 'GB-3',
-    },
-    // {
-    //   id: 5,
-    //   slug: 'nocturne-eyelet-belt',
-    //   name: 'Nocturne Eyelet Belt',
-    //   price: 220,
-    //   image: '/product-images/dragon-fly-model-x1.png',
-    //   images: ['/images/belt_detail.png', '/images/belt_hero.png', '/images/belt_lifestyle.png'],
-    //   description:
-    //     'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
-    //   material: 'Distressed Charcoal Calfskin',
-    //   buckle: 'Gunmetal Square Buckle',
-    //   imageId: 'GB-3',
-    // },
+  {
+    id: 4,
+    slug: 'nocturne-eyelet-belt',
+    name: 'Nocturne Eyelet Belt',
+    price: 220,
+    image: '/images/hero_a3.jpg',
+    images: ['/images/hero_a2.jpg', '/images/hero_a5.jpg', '/images/hero_a3.jpg'],
+    description:
+      'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
+    material: 'Distressed Charcoal Calfskin',
+    buckle: 'Gunmetal Square Buckle',
+    imageId: 'GB-3',
+  },
 ];

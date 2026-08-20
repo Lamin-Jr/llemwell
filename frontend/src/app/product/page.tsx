@@ -9,13 +9,13 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 import GhostButton from '@/components/ui/GhostButton';
 
 export default function ProductPage() {
-  const product = products[0];
+  const product = products[3];
 
   return (
     <main>
       {/* 1. Hero */}
       <HeroMedia
-        imageSrc="/images/belt_hero.png"
+        imageSrc="/images/herox6.jpg"
         imageAlt={product.name}
         subheading="The Masterpiece"
         heading={product.name}
@@ -32,7 +32,7 @@ export default function ProductPage() {
 
       {/* 3. Full-Bleed Detail Image */}
       <ImageShowcase
-        src="/images/belt_detail.png"
+        src="/images/herox8.jpg"
         alt="LLEMWELL belt detail"
         height="60vh"
       />
@@ -55,6 +55,16 @@ export default function ProductPage() {
         heading="Custom Hardware"
         description={`${product.buckle}\n\nForged in small batches, each piece of hardware is individually finished. The oxidation process begins from the moment of creation — a living material that evolves with its owner.`}
         reverse={true}
+      />
+
+       {/* 5. Split: Hardware */}
+      <SplitContent
+        imageSrc={product.images[2] || product.images[0]}
+        imageAlt="Hardware Detail"
+        subheading="The Metal"
+        heading="Custom Hardware"
+        description={`${product.buckle}\n\nForged in small batches, each piece of hardware is individually finished. The oxidation process begins from the moment of creation — a living material that evolves with its owner.`}
+        reverse={false}
       />
 
       {/* 6. CTA Section */}

@@ -9,7 +9,7 @@ export default function ProductsPage() {
     <main>
       {/* 1. Hero */}
       <HeroMedia
-        imageSrc="/images/heroShowcase.jpg"
+        imageSrc="/images/herox8.jpg"
         imageAlt="The LLEMWELL Collection"
         heading="The Collection"
         subheading="Handcrafted Pieces"

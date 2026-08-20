@@ -39,12 +39,25 @@ const products = [
         buckle: 'Oxidized Chain-link Metal',
         imageId: 'GB-2'
     },
+    // {
+    //   id: 3,
+    //   slug: 'nocturne-eyelet-belt',
+    //   name: 'Nocturne Eyelet Belt',
+    //   price: 720,
+    //   image: '/images/belt_detail.png',
+    //   images: ['/images/belt_detail.png', '/images/belt_hero.png', '/images/belt_lifestyle.png'],
+    //   description:
+    //     'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
+    //   material: 'Distressed Charcoal Calfskin',
+    //   buckle: 'Gunmetal Square Buckle',
+    //   imageId: 'GB-3',
+    // },
     {
         id: 3,
         slug: 'nocturne-eyelet-belt',
         name: 'Nocturne Eyelet Belt',
-        price: 720,
-        image: '/images/belt_detail.png',
+        price: 220,
+        image: '/product-images/dragon-fly-model-x1.png',
         images: [
             '/images/belt_detail.png',
             '/images/belt_hero.png',
@@ -60,11 +73,11 @@ const products = [
         slug: 'nocturne-eyelet-belt',
         name: 'Nocturne Eyelet Belt',
         price: 220,
-        image: '/product-images/dragon-fly-model-x1.png',
+        image: '/images/hero_a3.jpg',
         images: [
-            '/images/belt_detail.png',
-            '/images/belt_hero.png',
-            '/images/belt_lifestyle.png'
+            '/images/hero_a2.jpg',
+            '/images/hero_a5.jpg',
+            '/images/hero_a3.jpg'
         ],
         description: 'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
         material: 'Distressed Charcoal Calfskin',
@@ -303,37 +316,21 @@ const submenuItemVariants = {
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex items-center justify-between",
+                                    className: "flex items-center justify-between pb-4",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                    className: "text-sm md:text-base luxury-heading tracking-wide opacity-90 group-hover:opacity-100 transition-opacity duration-300",
-                                                    style: {
-                                                        color: 'var(--foreground)'
-                                                    },
-                                                    children: product.name
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/Header.tsx",
-                                                    lineNumber: 158,
-                                                    columnNumber: 19
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-[11px] mt-1 uppercase tracking-[0.15em]",
-                                                    style: {
-                                                        color: 'var(--color-text-tertiary)'
-                                                    },
-                                                    children: [
-                                                        "€",
-                                                        product.price.toLocaleString()
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/components/Header.tsx",
-                                                    lineNumber: 164,
-                                                    columnNumber: 19
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                className: "text-sm md:text-base luxury-heading tracking-wide opacity-90 group-hover:opacity-100 transition-opacity duration-300",
+                                                style: {
+                                                    color: 'var(--foreground)'
+                                                },
+                                                children: product.name
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/Header.tsx",
+                                                lineNumber: 158,
+                                                columnNumber: 19
+                                            }, this)
+                                        }, void 0, false, {
                                             fileName: "[project]/components/Header.tsx",
                                             lineNumber: 157,
                                             columnNumber: 17

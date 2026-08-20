@@ -153,7 +153,7 @@ function SubmenuContent({ onClose }: { onClose: () => void }) {
               </div>
 
               {/* Product Info */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between pb-4">
                 <div>
                   <h3
                     className="text-sm md:text-base luxury-heading tracking-wide opacity-90 group-hover:opacity-100 transition-opacity duration-300"
@@ -161,13 +161,13 @@ function SubmenuContent({ onClose }: { onClose: () => void }) {
                   >
                     {product.name}
                   </h3>
-                  <p
+                  {/* <p
                     className="text-[11px] mt-1 uppercase tracking-[0.15em]"
                     style={{ color: 'var(--color-text-tertiary)' }}
                   >
                     €{product.price.toLocaleString()}
                     
-                  </p>
+                  </p> */}
                 </div>
                 <span
                   className="text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-70 transition-opacity duration-300"

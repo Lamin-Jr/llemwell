@@ -10,7 +10,7 @@ export default function AboutPage() {
     <main>
       {/* 1. Hero */}
       <HeroMedia
-        imageSrc="/images/belt_detail.png"
+        imageSrc="/images/concep_dx_1.jpg"
         imageAlt="LLEMWELL Heritage"
         heading="Our Heritage"
         subheading="The Story of LLEMWELL"

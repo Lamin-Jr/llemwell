@@ -5,7 +5,7 @@
 # FRONT-END
 
 # dependencies FE
-frontend/node_modules
+frontend/node_modules/
 frontend/.pnp
 frontend/.pnp.*
 frontend/.yarn/*

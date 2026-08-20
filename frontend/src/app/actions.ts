@@ -1,12 +1,5 @@
 'use server';
 
-import { PrismaClient } from '../generated/prisma';
-
-// Use a global PRISMA instance to prevent exhausting connections in development
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
-const prisma = globalForPrisma.prisma || new PrismaClient();
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
-
 export async function submitContactForm(formData: FormData) {
   try {
     const name = formData.get('name') as string;
@@ -14,36 +7,26 @@ export async function submitContactForm(formData: FormData) {
     const phone = formData.get('phone') as string | null;
     const inquiry = formData.get('inquiry') as string;
 
-  
-
     if (!name || !email || !inquiry) {
       return { success: false, error: 'Name, Email, and Inquiry are required.' };
     }
 
-    const message = await prisma.contactMessage.create({
-      data: {
-        name,
-        email,
-        phone,
-        inquiry,
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+    const response = await fetch(`${apiUrl}/api/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ name, email, phone, inquiry }),
     });
 
-    return { success: true, messageId: message.id };
+    if (!response.ok) {
+      throw new Error('Failed to submit');
+    }
 
-    // switch (true) {
-    //   case !name: 
-    //   return { success: false, error: "Name is Required" };
-    //   case !email: 
-    //   return { success: false, error: "Email is Required" };
-    //   case !phone: 
-    //   return { success: false, error: "Email is Required" };
-    //   case !inquiry: 
-    //   return { success: false, error: "Email is Required" };
-    //   default: 
-    //   return {success: false, error: "Please Fill the form"}
-      
-    // }
+    const data = await response.json();
+    return { success: true, messageId: data.messageId };
+
   } catch (error) {
     console.error('Error submitting contact form:', error);
     return { success: false, error: 'Failed to submit the form. Please try again later.' };

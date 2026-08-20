@@ -10,10 +10,10 @@ export default function Home() {
     <main>
       {/* 1. Cinematic Hero */}
       <HeroMedia
-        imageSrc="/design_content/hero_tag_1.jpg.jpeg"
+        imageSrc="/images/herox3.jpg"
         imageAlt="LLEMWELL Luxury Belt"
         // subheading="Uncompromising Craftsmanship"
-        heading=""
+        heading="Breaking Barriers"
         // ctaText="Discover the Collection"
         ctaLink="/products"
         showScrollIndicator={true}
@@ -29,14 +29,14 @@ export default function Home() {
 
       {/* 3. Full-Bleed Detail Image */}
       <ImageShowcase
-        src="/product-images/dragon-fly-belt-hero-x2.png"
+        src="/images/herox_A2.jpg"
         alt="LLEMWELL belt close-up detail"
         height="60vh"
       />
 
       {/* 4. Split Content — Material Story */}
       <SplitContent
-        imageSrc="/product-images/dragon-fly-model-x2.png"
+        imageSrc="/images/herox5.jpg"
         imageAlt="LLEMWELL distressed calfskin leather"
         subheading="The Material"
         heading="Distressed Calfskin"
@@ -66,7 +66,7 @@ export default function Home() {
 
       {/* 6. CTA Hero */}
       <HeroMedia
-        imageSrc="/images/heroShowcase.jpg"
+        imageSrc="/images/herox4.jpg"
         imageAlt="A Statement of Power"
         heading="A Statement of Power"
         subheading="Worn by the few who define the future"

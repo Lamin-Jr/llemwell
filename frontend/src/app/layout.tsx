@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 const llemwellFont = localFont({
   src: './fonts/llemwell_2.otf',
   variable: '--font-llemwell',
-  display: "auto",
+  display: 'swap',
 });
 
 // const llemwell2Font = localFont({
