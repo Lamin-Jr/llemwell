@@ -10,10 +10,10 @@ export default function Home() {
     <main>
       {/* 1. Cinematic Hero */}
       <HeroMedia
-        imageSrc="/images/herox3.jpg"
+        imageSrc="/images/home_hero_x1.jpg"
         imageAlt="LLEMWELL Luxury Belt"
         // subheading="Uncompromising Craftsmanship"
-        heading="Breaking Barriers"
+        // heading="Breaking Barriers"
         // ctaText="Discover the Collection"
         ctaLink="/products"
         showScrollIndicator={true}

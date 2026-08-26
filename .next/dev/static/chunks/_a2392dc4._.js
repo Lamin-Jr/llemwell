@@ -9,12 +9,12 @@ __turbopack_context__.s([
 const products = [
     {
         id: 1,
-        slug: 'DRAGONFLY-V1',
-        name: 'DRAGONFLY-V1 LEATHER BELT',
+        slug: 'mirror_v1',
+        name: 'DRAGONFLY-V1 Mirror',
         price: 850,
-        image: '/product-images/dragon-fly-model-x2.png',
+        image: '/product-images/mirror/mirror_1.jpg',
         images: [
-            '/product-images/dragon-fly-model-x4.png',
+            '/product-images/mirror/mirror_1.jpg',
             '/images/belt_detail.png',
             '/images/belt_lifestyle.png'
         ],
@@ -24,42 +24,13 @@ const products = [
         imageId: 'GB-1'
     },
     {
-        id: 2,
-        slug: 'phantom-chain-belt',
-        name: 'Phantom Chain Leather Belt',
-        price: 650,
-        image: '/images/belt_lifestyle.png',
-        images: [
-            '/images/belt_lifestyle.png',
-            '/images/belt_detail.png',
-            '/images/belt_hero.png'
-        ],
-        description: 'Industrial elegance redefined. Hand-stitched from aged calfskin with oxidized chain links and a vintage clasp mechanism. Each belt develops its own unique patina over time.',
-        material: 'Aged Black Calfskin',
-        buckle: 'Oxidized Chain-link Metal',
-        imageId: 'GB-2'
-    },
-    // {
-    //   id: 3,
-    //   slug: 'nocturne-eyelet-belt',
-    //   name: 'Nocturne Eyelet Belt',
-    //   price: 720,
-    //   image: '/images/belt_detail.png',
-    //   images: ['/images/belt_detail.png', '/images/belt_hero.png', '/images/belt_lifestyle.png'],
-    //   description:
-    //     'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
-    //   material: 'Distressed Charcoal Calfskin',
-    //   buckle: 'Gunmetal Square Buckle',
-    //   imageId: 'GB-3',
-    // },
-    {
         id: 3,
-        slug: 'nocturne-eyelet-belt',
-        name: 'Nocturne Eyelet Belt',
+        slug: 'hairline',
+        name: 'hairline v1',
         price: 220,
-        image: '/product-images/dragon-fly-model-x1.png',
+        image: '/product-images/hairline/hairline_1.jpg',
         images: [
-            '/images/belt_detail.png',
+            '/product-images/hairline/hairline_1.jpg',
             '/images/belt_hero.png',
             '/images/belt_lifestyle.png'
         ],
@@ -69,20 +40,36 @@ const products = [
         imageId: 'GB-3'
     },
     {
-        id: 4,
-        slug: 'nocturne-eyelet-belt',
-        name: 'Nocturne Eyelet Belt',
-        price: 220,
-        image: '/images/hero_a3.jpg',
+        id: 2,
+        slug: 'dlc_black',
+        name: 'DLC Black',
+        price: 650,
+        image: '/product-images/dlc_black/dlc_black_4.jpg',
         images: [
-            '/images/hero_a2.jpg',
+            '/product-images/dlc_black/dlc_black_4.jpg',
+            '/product-images/dlc_black/dlc_black_2.jpg',
+            '/product-images/dlc_black/dlc_black_3.jpg'
+        ],
+        description: 'Industrial elegance redefined. Hand-stitched from aged calfskin with oxidized chain links and a vintage clasp mechanism. Each belt develops its own unique patina over time.',
+        material: 'Aged Black Calfskin',
+        buckle: 'Oxidized Chain-link Metal',
+        imageId: 'GB-2'
+    },
+    {
+        id: 4,
+        slug: '925',
+        name: '925',
+        price: 220,
+        image: '/product-images/925/925.jpg',
+        images: [
+            '/product-images/925/925.jpg',
             '/images/hero_a5.jpg',
             '/images/hero_a3.jpg'
         ],
         description: 'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',
         material: 'Distressed Charcoal Calfskin',
         buckle: 'Gunmetal Square Buckle',
-        imageId: 'GB-3'
+        imageId: 'GB-4'
     }
 ];
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
