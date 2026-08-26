@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/llemwellfont_f7d13425.module.css"],"sourcesContent":["@font-face {\n    \nfont-family: 'llemwellFont';\n    src: url('@vercel/turbopack-next/internal/font/local/font?{%22path%22:%22./fonts/llemwell_2.otf%22,%22preload%22:true,%22has_size_adjust%22:true}') format('opentype');\n    font-display: auto;\n    \n}\n\n@font-face {\n    font-family: 'llemwellFont Fallback';\n    src: local(\"Arial\");\n    ascent-override: 80.00%;\ndescent-override: 20.10%;\nline-gap-override: 9.00%;\nsize-adjust: 100.00%;\n\n}\n\n.className {\n    font-family: 'llemwellFont', 'llemwellFont Fallback';\n    \n}\n.variable {\n    --font-llemwell: 'llemwellFont', 'llemwellFont Fallback';\n}\n\n"],"names":[],"mappings":"AAAA;;;;;;AAQA;;;;;;;;;AAUA;;;;AAIA"}}]
-}
