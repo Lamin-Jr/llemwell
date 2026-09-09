@@ -2,19 +2,31 @@ import HeroMedia from '@/components/sections/HeroMedia';
 import EditorialText from '@/components/sections/EditorialText';
 import ImageShowcase from '@/components/sections/ImageShowcase';
 import SplitContent from '@/components/sections/SplitContent';
-import ProductCard from '@/components/ui/ProductCard';
-import { products } from '@/lib/data';
+import ProductCard, { BackendProduct } from '@/components/ui/ProductCard';
 
-export default function Home() {
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
+export default async function Home() {
+  let products: BackendProduct[] = [];
+  
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+    const res = await fetch(`${apiUrl}/api/products`, { next: { revalidate: 60 } });
+    if (res.ok) {
+      const data = await res.json();
+      products = data.products || [];
+    }
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+  }
+
   return (
     <main>
       {/* 1. Cinematic Hero */}
       <HeroMedia
         imageSrc="/images/home_hero_x1.jpg"
         imageAlt="LLEMWELL Luxury Belt"
-        // subheading="Uncompromising Craftsmanship"
-        // heading="Breaking Barriers"
-        // ctaText="Discover the Collection"
+        heading=""
         ctaLink="/products"
         showScrollIndicator={true}
         overlayOpacity={50}
@@ -29,7 +41,7 @@ export default function Home() {
 
       {/* 3. Full-Bleed Detail Image */}
       <ImageShowcase
-        src="/images/herox_A2.jpg"
+        src="/images/hero_a2.jpg"
         alt="LLEMWELL belt close-up detail"
         height="60vh"
       />
@@ -56,11 +68,18 @@ export default function Home() {
               Explore Our Pieces
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          
+          {products.length === 0 ? (
+            <div className="text-center text-gray-500 py-12">
+              <p>No products available yet. Check back later.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

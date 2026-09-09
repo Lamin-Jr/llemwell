@@ -2,19 +2,32 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Product } from '@/lib/types/types';
+
+export type BackendProduct = {
+  id: string | number;
+  name: string;
+  description: string | null;
+  price: number;
+  stock?: number;
+  image: string | null;
+  images?: string[];
+  slug?: string;
+};
 
 interface ProductCardProps {
-  product: Product;
+  product: BackendProduct;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const displayImage = product.image || '/images/placeholder.jpg';
+  const displaySlug = product.slug || product.id.toString();
+
   return (
-    <Link href={`/products/${product.slug}`} className="group block bg-surface-secondary">
+    <Link href={`/products/${displaySlug}`} className="group block bg-surface-secondary">
       {/* Image */}
       <div className="relative overflow-hidden aspect-3/4">
         <Image
-          src={product.image}
+          src={displayImage}
           alt={product.name}
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"

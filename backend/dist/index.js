@@ -11,6 +11,7 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const categoryRoutes_1 = __importDefault(require("./routes/categoryRoutes"));
 const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
 const orderRoutes_1 = __importDefault(require("./routes/orderRoutes"));
+const contactRoutes_1 = __importDefault(require("./routes/contactRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 8080;
@@ -33,6 +34,7 @@ app.use('/api/users', userRoutes_1.default);
 app.use('/api/categories', categoryRoutes_1.default);
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/orders', orderRoutes_1.default);
+app.use('/api/contact', contactRoutes_1.default);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

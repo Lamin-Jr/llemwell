@@ -9,8 +9,8 @@ export const products: Product[] = [
     image: '/product-images/mirror/mirror_1.jpg',
     images: [
       '/product-images/mirror/mirror_1.jpg',
-      '/images/belt_detail.png',
-      '/images/belt_lifestyle.png',
+      '/product-images/mirror/mirror_2.jpg',
+      '/product-images/mirror/mirror_3.jpg',
     ],
     description:
       'A true piece of high-fashion grunge. Crafted from distressed black calfskin leather, fortified with heavy metal eyelets, silver spikes, and chunky vintage hardware. Designed for the raw, unapologetic aesthetic.',
@@ -26,8 +26,8 @@ export const products: Product[] = [
     image: '/product-images/hairline/hairline_1.jpg',
     images: [
       '/product-images/hairline/hairline_1.jpg',
-      '/images/belt_hero.png',
-      '/images/belt_lifestyle.png',
+      '/product-images/hairline/hairline_2.jpg',
+      '/product-images/hairline/hairline_3.jpg',
     ],
     description:
       'Minimalist brutalism. Clean lines of distressed leather punctuated by rows of gunmetal eyelets. A quieter rebellion — no less dangerous.',

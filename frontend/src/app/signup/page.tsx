@@ -23,7 +23,7 @@ export default async function SignupPage(props: {
     const password = formData.get('password') as string
     const supabase = await createClient()
 
-    const { error } = await supabase.auth.signUp({
+    const { error, data } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -34,6 +34,25 @@ export default async function SignupPage(props: {
     if (error) {
       console.error('Signup error:', error.message)
       return redirect(`/signup?message=${encodeURIComponent(error.message)}`)
+    }
+
+    // If Email Confirmations are turned OFF in Supabase, signUp returns a session immediately.
+    // We need to sync them to the backend and redirect to home.
+    if (data.session) {
+      try {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}/api/users/sync`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${data.session.access_token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: data.user?.email })
+        })
+      } catch (err) {
+        console.error('Failed to sync user with backend on signup', err)
+      }
+      
+      return redirect('/')
     }
 
     return redirect('/signup?message=Check your email to continue sign in process')

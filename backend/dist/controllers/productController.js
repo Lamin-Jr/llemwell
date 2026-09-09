@@ -52,7 +52,7 @@ const getProductById = async (req, res) => {
 exports.getProductById = getProductById;
 const createProduct = async (req, res) => {
     try {
-        const { name, description, price, stock, categoryId, imageUrl } = req.body;
+        const { name, description, price, stock, categoryId, image, images } = req.body;
         if (!name || price === undefined) {
             res.status(400).json({ error: 'Name and price are required' });
             return;
@@ -64,7 +64,8 @@ const createProduct = async (req, res) => {
                 price: parseFloat(price),
                 stock: parseInt(stock) || 0,
                 categoryId,
-                imageUrl
+                image,
+                images: images || []
             }
         });
         res.status(201).json({ product });
@@ -78,7 +79,7 @@ exports.createProduct = createProduct;
 const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, description, price, stock, categoryId, imageUrl, isActive } = req.body;
+        const { name, description, price, stock, categoryId, image, images, isActive } = req.body;
         const updateData = {};
         if (name !== undefined)
             updateData.name = name;
@@ -90,8 +91,10 @@ const updateProduct = async (req, res) => {
             updateData.stock = parseInt(stock);
         if (categoryId !== undefined)
             updateData.categoryId = categoryId;
-        if (imageUrl !== undefined)
-            updateData.imageUrl = imageUrl;
+        if (image !== undefined)
+            updateData.image = image;
+        if (images !== undefined)
+            updateData.images = images;
         if (isActive !== undefined)
             updateData.isActive = isActive;
         const product = await prisma_1.default.product.update({

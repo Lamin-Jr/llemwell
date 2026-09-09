@@ -1,10 +1,24 @@
 import HeroMedia from '@/components/sections/HeroMedia';
 import EditorialText from '@/components/sections/EditorialText';
-import ProductCard from '@/components/ui/ProductCard';
+import ProductCard, { BackendProduct } from '@/components/ui/ProductCard';
 import GhostButton from '@/components/ui/GhostButton';
-import { products } from '@/lib/data';
 
-export default function ProductsPage() {
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
+export default async function ProductsPage() {
+  let products: BackendProduct[] = [];
+  
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+    const res = await fetch(`${apiUrl}/api/products`, { next: { revalidate: 60 } });
+    if (res.ok) {
+      const data = await res.json();
+      products = data.products || [];
+    }
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+  }
+
   return (
     <main>
       {/* 1. Hero */}
@@ -20,11 +34,17 @@ export default function ProductsPage() {
       {/* 2. Product Grid */}
       <section className="section-padding">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {products.length === 0 ? (
+            <div className="text-center text-gray-500 py-12">
+              <p>No products available yet. Check back later.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
