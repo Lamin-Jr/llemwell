@@ -1,27 +1,25 @@
-import { createClient } from '@/src/utils/supabase/server'
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
-import Image from 'next/image'
-import { headers } from 'next/headers'
+import { createClient } from '@/src/utils/supabase/server';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { headers } from 'next/headers';
 
-export default async function SignupPage(props: {
-  searchParams: Promise<{ message: string }>
-}) {
-  const searchParams = await props.searchParams
-  const supabase = await createClient()
-  const { data } = await supabase.auth.getUser()
+export default async function SignupPage(props: { searchParams: Promise<{ message: string }> }) {
+  const searchParams = await props.searchParams;
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
 
   if (data?.user) {
-    redirect('/')
+    redirect('/');
   }
 
   const signUp = async (formData: FormData) => {
-    'use server'
+    'use server';
 
-    const origin = (await headers()).get('origin')
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    const supabase = await createClient()
+    const origin = (await headers()).get('origin');
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    const supabase = await createClient();
 
     const { error, data } = await supabase.auth.signUp({
       email,
@@ -29,42 +27,45 @@ export default async function SignupPage(props: {
       options: {
         emailRedirectTo: `${origin}/auth/callback`,
       },
-    })
+    });
 
     if (error) {
-      console.error('Signup error:', error.message)
-      return redirect(`/signup?message=${encodeURIComponent(error.message)}`)
+      console.error('Signup error:', error.message);
+      return redirect(`/signup?message=${encodeURIComponent(error.message)}`);
     }
 
     // If Email Confirmations are turned OFF in Supabase, signUp returns a session immediately.
     // We need to sync them to the backend and redirect to home.
     if (data.session) {
       try {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}/api/users/sync`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${data.session.access_token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email: data.user?.email })
-        })
+        await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}/api/users/sync`,
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${data.session.access_token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: data.user?.email }),
+          }
+        );
       } catch (err) {
-        console.error('Failed to sync user with backend on signup', err)
+        console.error('Failed to sync user with backend on signup', err);
       }
-      
-      return redirect('/')
+
+      return redirect('/');
     }
 
-    return redirect('/signup?message=Check your email to continue sign in process')
-  }
+    return redirect('/signup?message=Check your email to continue sign in process');
+  };
 
   return (
     <div className="flex min-h-screen w-full bg-white text-gray-900 font-sans flex-row-reverse">
       {/* Right side: Premium Image Banner */}
       <div className="hidden lg:flex w-1/2 relative bg-gray-100">
-        <Image 
-          src="/auth-banner.jpg" 
-          alt="LLEMWELL Editorial Fashion" 
+        <Image
+          src="/auth-banner.jpg"
+          alt="LLEMWELL Editorial Fashion"
           fill
           className="object-cover"
           priority
@@ -103,7 +104,9 @@ export default async function SignupPage(props: {
           <form action={signUp} className="flex flex-col gap-6">
             <div>
               <h1 className="text-3xl font-normal mb-2 tracking-tight">Create an account</h1>
-              <p className="text-gray-500 font-light">Join LLEMWELL for exclusive access to premium collections.</p>
+              <p className="text-gray-500 font-light">
+                Join LLEMWELL for exclusive access to premium collections.
+              </p>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -137,14 +140,19 @@ export default async function SignupPage(props: {
             </button>
 
             {searchParams?.message && (
-              <p className={`mt-2 p-3 text-sm border rounded text-center ${searchParams.message.includes('Check') ? 'bg-green-50 text-green-700 border-green-100' : 'bg-red-50 text-red-600 border-red-100'}`}>
+              <p
+                className={`mt-2 p-3 text-sm border rounded text-center ${searchParams.message.includes('Check') ? 'bg-green-50 text-green-700 border-green-100' : 'bg-red-50 text-red-600 border-red-100'}`}
+              >
                 {searchParams.message}
               </p>
             )}
 
             <p className="text-sm text-center mt-6 text-gray-500">
               Already have an account?{' '}
-              <Link href="/login" className="text-black font-medium underline underline-offset-4 hover:text-gray-600 transition-colors">
+              <Link
+                href="/login"
+                className="text-black font-medium underline underline-offset-4 hover:text-gray-600 transition-colors"
+              >
                 Log in
               </Link>
             </p>
@@ -152,5 +160,5 @@ export default async function SignupPage(props: {
         </div>
       </div>
     </div>
-  )
+  );
 }

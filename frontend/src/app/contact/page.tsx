@@ -46,39 +46,27 @@ export default function ContactPage() {
             {/* LEFT: Contact Info */}
             <div className="flex flex-col justify-center">
               <ScrollReveal direction="up">
-                <p className="luxury-subheading text-accent-warm mb-4">
-                  Get in Touch
-                </p>
+                <p className="luxury-subheading text-accent-warm mb-4">Get in Touch</p>
                 <h2 className="luxury-heading text-text-primary text-3xl md:text-4xl mt-4">
                   We are Here for You
                 </h2>
                 <p className="body-serif text-text-secondary mt-6 leading-relaxed">
-                  LLEMWELL provides a dedicated white-glove service for our
-                  clients. Whether you wish to request an allocation, inquire
-                  about bespoke sizing, or arrange a private viewing.
+                  LLEMWELL provides a dedicated white-glove service for our clients. Whether you
+                  wish to request an allocation, inquire about bespoke sizing, or arrange a private
+                  viewing.
                 </p>
 
                 {/* Contact Details */}
                 <div className="mt-12 space-y-8">
                   <div>
-                    <p className="luxury-caption text-text-tertiary">
-                      Headquarters
-                    </p>
-                    <p className="text-text-primary text-sm mt-2">
-                      Nolo District, Milano, Italy
-                    </p>
+                    <p className="luxury-caption text-text-tertiary">Headquarters</p>
+                    <p className="text-text-primary text-sm mt-2">Nolo District, Milano, Italy</p>
                   </div>
 
                   <div>
-                    <p className="luxury-caption text-text-tertiary">
-                      Concierge
-                    </p>
-                    <p className="text-text-primary text-sm mt-2">
-                      +39 30 000 00 00
-                    </p>
-                    <p className="text-text-primary text-sm mt-1">
-                      contact@llemwell.com
-                    </p>
+                    <p className="luxury-caption text-text-tertiary">Concierge</p>
+                    <p className="text-text-primary text-sm mt-2">+39 30 000 00 00</p>
+                    <p className="text-text-primary text-sm mt-1">contact@llemwell.com</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -94,24 +82,17 @@ export default function ContactPage() {
             >
               {success ? (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-6 py-20">
-                  <h2 className="luxury-heading text-text-primary text-3xl">
-                    Inquiry Received
-                  </h2>
+                  <h2 className="luxury-heading text-text-primary text-3xl">Inquiry Received</h2>
                   <p className="body-serif text-text-secondary">
                     Our concierge will contact you within 24 hours.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-8">
-                  {error && (
-                    <div className="text-red-400 text-sm mt-2">{error}</div>
-                  )}
+                  {error && <div className="text-red-400 text-sm mt-2">{error}</div>}
 
                   <div>
-                    <label
-                      htmlFor="name"
-                      className="luxury-caption text-text-tertiary block mb-2"
-                    >
+                    <label htmlFor="name" className="luxury-caption text-text-tertiary block mb-2">
                       Full Name *
                     </label>
                     <input
@@ -123,22 +104,13 @@ export default function ContactPage() {
                       style={{
                         borderColor: 'var(--border-subtle)',
                       }}
-                      onFocus={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'var(--border-strong)')
-                      }
-                      onBlur={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'var(--border-subtle)')
-                      }
+                      onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--border-strong)')}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border-subtle)')}
                     />
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="luxury-caption text-text-tertiary block mb-2"
-                    >
+                    <label htmlFor="email" className="luxury-caption text-text-tertiary block mb-2">
                       Email Address *
                     </label>
                     <input
@@ -150,22 +122,13 @@ export default function ContactPage() {
                       style={{
                         borderColor: 'var(--border-subtle)',
                       }}
-                      onFocus={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'var(--border-strong)')
-                      }
-                      onBlur={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'var(--border-subtle)')
-                      }
+                      onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--border-strong)')}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border-subtle)')}
                     />
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="phone"
-                      className="luxury-caption text-text-tertiary block mb-2"
-                    >
+                    <label htmlFor="phone" className="luxury-caption text-text-tertiary block mb-2">
                       Phone Number
                     </label>
                     <input
@@ -176,14 +139,8 @@ export default function ContactPage() {
                       style={{
                         borderColor: 'var(--border-subtle)',
                       }}
-                      onFocus={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'var(--border-strong)')
-                      }
-                      onBlur={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'var(--border-subtle)')
-                      }
+                      onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--border-strong)')}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border-subtle)')}
                     />
                   </div>
 
@@ -203,14 +160,8 @@ export default function ContactPage() {
                       style={{
                         borderColor: 'var(--border-subtle)',
                       }}
-                      onFocus={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'var(--border-strong)')
-                      }
-                      onBlur={(e) =>
-                        (e.currentTarget.style.borderColor =
-                          'var(--border-subtle)')
-                      }
+                      onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--border-strong)')}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border-subtle)')}
                     />
                   </div>
 

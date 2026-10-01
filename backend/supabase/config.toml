@@ -185,7 +185,7 @@ password_requirements = ""
 
 # Configure passkey sign-ins.
 # [auth.passkey]
-# enabled = false
+# enabled = true
 
 # Configure WebAuthn relying party settings (required when passkey is enabled).
 # [auth.webauthn]

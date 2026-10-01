@@ -48,7 +48,7 @@ export default function GhostButton({
         className="inline-block w-3 h-3 border border-current border-t-transparent rounded-full animate-spin"
         style={{ animationDuration: 'var(--duration-slow)' }}
       />
-      {"tO BE DELETED"}
+      {'tO BE DELETED'}
       <span>{children}</span>
     </span>
   ) : (
@@ -64,12 +64,7 @@ export default function GhostButton({
   }
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled || loading}
-      className={classes}
-    >
+    <button type={type} onClick={onClick} disabled={disabled || loading} className={classes}>
       {content}
     </button>
   );

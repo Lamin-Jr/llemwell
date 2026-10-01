@@ -15,7 +15,7 @@ interface SplitContentProps {
   ctaLink?: string;
   reverse?: boolean;
   className?: string;
-  sizes?:string;
+  sizes?: string;
 }
 
 export default function SplitContent({
@@ -34,9 +34,7 @@ export default function SplitContent({
   return (
     <section className={`w-full ${className}`}>
       <div
-        className={`flex flex-col ${
-          reverse ? 'md:flex-row-reverse' : 'md:flex-row'
-        } min-h-[70vh]`}
+        className={`flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} min-h-[70vh]`}
       >
         {/* Image — 55% */}
         <motion.div
@@ -70,11 +68,7 @@ export default function SplitContent({
           }}
         >
           <div className="max-w-[480px]">
-            {subheading && (
-              <p className="luxury-subheading text-accent-warm mb-6">
-                {subheading}
-              </p>
-            )}
+            {subheading && <p className="luxury-subheading text-accent-warm mb-6">{subheading}</p>}
 
             <h2
               className="luxury-heading text-text-primary mb-8"
@@ -83,9 +77,7 @@ export default function SplitContent({
               {heading}
             </h2>
 
-            <p className="body-serif text-text-secondary whitespace-pre-line mb-8">
-              {description}
-            </p>
+            <p className="body-serif text-text-secondary whitespace-pre-line mb-8">{description}</p>
 
             {ctaText && ctaLink && (
               <GhostButton href={ctaLink} size="md">

@@ -1,61 +1,62 @@
-import { createClient } from '@/src/utils/supabase/server'
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
-import Image from 'next/image'
+import { createClient } from '@/src/utils/supabase/server';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 
-export default async function LoginPage(props: {
-  searchParams: Promise<{ message: string }>
-}) {
-  const searchParams = await props.searchParams
-  const supabase = await createClient()
-  const { data } = await supabase.auth.getUser()
+export default async function LoginPage(props: { searchParams: Promise<{ message: string }> }) {
+  const searchParams = await props.searchParams;
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
 
   if (data?.user) {
-    redirect('/')
+    redirect('/');
   }
 
   const signIn = async (formData: FormData) => {
-    'use server'
+    'use server';
 
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    const supabase = await createClient()
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    const supabase = await createClient();
 
     const { error, data } = await supabase.auth.signInWithPassword({
       email,
       password,
-    })
+    });
 
     if (error) {
-      console.error('Login error:', error.message)
-      return redirect(`/login?message=${encodeURIComponent(error.message)}`)
+      console.error('Login error:', error.message);
+      return redirect(`/login?message=${encodeURIComponent(error.message)}`);
     }
 
     if (data.session) {
       try {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}/api/users/sync`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${data.session.access_token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email: data.user.email })
-        })
+        await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}/api/users/sync`,
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${data.session.access_token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: data.user.email }),
+          }
+        );
       } catch (err) {
-        console.error('Failed to sync user with backend on login', err)
+        console.error('Failed to sync user with backend on login', err);
       }
     }
 
-    return redirect('/')
-  }
+    return redirect('/');
+  };
 
   return (
     <div className="flex min-h-screen w-full bg-white text-gray-900 font-sans">
       {/* Left side: Premium Image Banner */}
       <div className="hidden lg:flex w-1/2 relative bg-gray-100">
-        <Image 
-          src="/images/auth-img-1.jpg" 
-          alt="LLEMWELL Editorial Fashion" 
+        <Image
+          src="/images/auth-img-1.jpg"
+          alt="LLEMWELL Editorial Fashion"
           fill
           className="object-cover"
           priority
@@ -63,7 +64,9 @@ export default async function LoginPage(props: {
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute bottom-12 left-12 text-white">
           <h2 className="text-4xl font-light mb-2 tracking-wide font-serif">LLEMWELL</h2>
-          <p className="text-sm font-light tracking-widest uppercase">The Essence of Modern Luxury</p>
+          <p className="text-sm font-light tracking-widest uppercase">
+            The Essence of Modern Luxury
+          </p>
         </div>
       </div>
 
@@ -135,7 +138,10 @@ export default async function LoginPage(props: {
 
             <p className="text-sm text-center mt-6 text-gray-500">
               Don't have an account?{' '}
-              <Link href="/signup" className="text-black font-medium underline underline-offset-4 hover:text-gray-600 transition-colors">
+              <Link
+                href="/signup"
+                className="text-black font-medium underline underline-offset-4 hover:text-gray-600 transition-colors"
+              >
                 Sign up
               </Link>
             </p>
@@ -143,5 +149,5 @@ export default async function LoginPage(props: {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { products } from '@/lib/data';
+import { useProducts } from '@/src/context/ProductContext';
 import { useState } from 'react';
 import Image from 'next/image';
 import HeroMedia from '@/components/sections/HeroMedia';
@@ -10,15 +10,14 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function SingleProduct() {
   const { slug } = useParams();
-  const product = products.find((p) => p.slug === slug);
+  const { getProductBySlugOrId } = useProducts();
+  const product = getProductBySlugOrId(slug as string);
   const [currentImage, setCurrentImage] = useState(0);
 
   if (!product) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center px-6">
-        <h1 className="luxury-heading text-text-primary text-4xl mb-8">
-          Product not found
-        </h1>
+        <h1 className="luxury-heading text-text-primary text-4xl mb-8">Product not found</h1>
         <GhostButton href="/products" size="md">
           Return to Collection
         </GhostButton>
@@ -59,9 +58,7 @@ export default function SingleProduct() {
                       key={i}
                       onClick={() => setCurrentImage(i)}
                       className={`flex-1 aspect-video relative overflow-hidden border-2 transition-all duration-300 ${
-                        i === currentImage
-                          ? 'border-(--border-strong)'
-                          : 'border-transparent'
+                        i === currentImage ? 'border-(--border-strong)' : 'border-transparent'
                       }`}
                     >
                       <Image
@@ -87,10 +84,7 @@ export default function SingleProduct() {
                   €{product.price.toLocaleString()}
                 </p>
 
-                <hr
-                  className="my-8"
-                  style={{ borderColor: 'var(--border-subtle)' }}
-                />
+                <hr className="my-8" style={{ borderColor: 'var(--border-subtle)' }} />
 
                 <p className="body-serif text-text-secondary leading-relaxed">
                   {product.description}
@@ -99,20 +93,12 @@ export default function SingleProduct() {
                 {/* Specs */}
                 <div className="mt-8 space-y-6">
                   <div>
-                    <p className="luxury-caption text-text-tertiary">
-                      Material
-                    </p>
-                    <p className="text-text-primary text-sm mt-1">
-                      {product.material}
-                    </p>
+                    <p className="luxury-caption text-text-tertiary">Material</p>
+                    <p className="text-text-primary text-sm mt-1">{product.material}</p>
                   </div>
                   <div>
-                    <p className="luxury-caption text-text-tertiary">
-                      Hardware
-                    </p>
-                    <p className="text-text-primary text-sm mt-1">
-                      {product.buckle}
-                    </p>
+                    <p className="luxury-caption text-text-tertiary">Hardware</p>
+                    <p className="text-text-primary text-sm mt-1">{product.buckle}</p>
                   </div>
                 </div>
 

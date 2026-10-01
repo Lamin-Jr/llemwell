@@ -1,11 +1,3 @@
--- 1. Apply Schema Changes (Rename imageUrl to image, add images array)
-ALTER TABLE "Product" 
-RENAME COLUMN "imageUrl" TO "image";
-
-ALTER TABLE "Product"
-ADD COLUMN "images" TEXT[] DEFAULT ARRAY[]::TEXT[];
-
--- 2. Seed Static Products
 INSERT INTO "Product" (id, name, description, price, stock, image, images, "isActive", "createdAt", "updatedAt")
 VALUES
 (

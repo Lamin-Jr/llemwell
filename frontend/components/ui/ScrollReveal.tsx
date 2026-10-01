@@ -13,9 +13,9 @@ interface ScrollRevealProps {
 }
 
 const directionOffset: Record<string, { x: number; y: number }> = {
-  up:    { x: 0,   y: 40 },
-  down:  { x: 0,   y: -40 },
-  left:  { x: 40,  y: 0 },
+  up: { x: 0, y: 40 },
+  down: { x: 0, y: -40 },
+  left: { x: 40, y: 0 },
   right: { x: -40, y: 0 },
 };
 

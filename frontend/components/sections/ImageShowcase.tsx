@@ -24,18 +24,10 @@ export default function ImageShowcase({
     <ScrollReveal duration={1.2}>
       <section className={className}>
         <div className="relative w-full overflow-hidden" style={{ height }}>
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            priority={priority}
-            className="object-cover"
-          />
+          <Image src={src} alt={alt} fill priority={priority} className="object-cover" />
         </div>
 
-        {caption && (
-          <p className="luxury-caption text-center mt-4 px-6">{caption}</p>
-        )}
+        {caption && <p className="luxury-caption text-center mt-4 px-6">{caption}</p>}
       </section>
     </ScrollReveal>
   );

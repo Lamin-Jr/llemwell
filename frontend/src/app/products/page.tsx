@@ -1,23 +1,14 @@
 import HeroMedia from '@/components/sections/HeroMedia';
 import EditorialText from '@/components/sections/EditorialText';
-import ProductCard, { BackendProduct } from '@/components/ui/ProductCard';
+import ProductCard from '@/components/ui/ProductCard';
 import GhostButton from '@/components/ui/GhostButton';
+
+import { fetchProducts } from '@/src/lib/api/products';
 
 export const revalidate = 60; // Revalidate the page every 60 seconds
 
 export default async function ProductsPage() {
-  let products: BackendProduct[] = [];
-  
-  try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
-    const res = await fetch(`${apiUrl}/api/products`, { next: { revalidate: 60 } });
-    if (res.ok) {
-      const data = await res.json();
-      products = data.products || [];
-    }
-  } catch (error) {
-    console.error('Failed to fetch products:', error);
-  }
+  const products = await fetchProducts();
 
   return (
     <main>
@@ -48,7 +39,7 @@ export default async function ProductsPage() {
         </div>
       </section>
 
-      {/* 3. Editorial CTA */}
+      {/* 3. A Content Drax CTA */}
       <EditorialText
         subheading="Our Heritage"
         heading="Each Piece Tells a Story"

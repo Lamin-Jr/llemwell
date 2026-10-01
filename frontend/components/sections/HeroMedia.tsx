@@ -42,21 +42,13 @@ export default function HeroMedia({
   return (
     <section className="relative w-full h-screen overflow-hidden">
       {/* Background Image */}
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        fill
-        priority
-        className="object-cover object-center"
-      />
+      <Image src={imageSrc} alt={imageAlt} fill priority className="object-cover object-center" />
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent pointer-events-none" />
 
       {/* Content */}
-      <div
-        className={`relative z-10 flex h-full w-full container-luxury ${getAlignmentClasses()}`}
-      >
+      <div className={`relative z-10 flex h-full w-full container-luxury ${getAlignmentClasses()}`}>
         {subheading && (
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -73,7 +65,7 @@ export default function HeroMedia({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5 }}
           className="luxury-heading text-text-primary mb-8"
-          style={{ fontSize: "5.5rem", fontWeight: "var(--weight-light)" }}
+          style={{ fontSize: '5.5rem', fontWeight: 'var(--weight-light)' }}
         >
           {heading}
         </motion.h1>

@@ -5,9 +5,12 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "prisma generate && tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "postinstall": "prisma generate"
+    "start": "node --env-file=.env dist/index.js",
+    "dev": "ts-node-dev --env-file=.env --respawn --transpile-only src/index.ts",
+    "postinstall": "prisma generate",
+    "start:db": "supabase start",
+    "stop:db": "supabase stop",
+    "studio:db": "supabase studio"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -33,5 +36,8 @@
     "pg": "^8.22.0",
     "postgres": "^3.4.9",
     "stripe": "^22.4.0"
+  },
+  "prisma": {
+    "seed": "ts-node-dev seed.ts"
   }
 }

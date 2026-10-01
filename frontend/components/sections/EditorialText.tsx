@@ -20,11 +20,7 @@ export default function EditorialText({
     <section className={`section-padding ${className}`}>
       <ScrollReveal>
         <div className="container-narrow text-center">
-          {subheading && (
-            <p className="luxury-subheading text-accent-warm mb-6">
-              {subheading}
-            </p>
-          )}
+          {subheading && <p className="luxury-subheading text-accent-warm mb-6">{subheading}</p>}
 
           <h2
             className="luxury-heading text-text-primary mb-8"

@@ -52,7 +52,8 @@ export const metadata: Metadata = {
   keywords: ['LLEMWELL', 'luxury belts', 'handcrafted leather', 'designer belts', 'studded belt'],
   openGraph: {
     title: 'LLEMWELL | Handcrafted Italian Made Belts',
-    description: 'Handcrafted luxury belts forged from distressed calfskin and heavy metal hardware.',
+    description:
+      'Handcrafted luxury belts forged from distressed calfskin and heavy metal hardware.',
     type: 'website',
   },
 };
@@ -61,11 +62,17 @@ export const metadata: Metadata = {
    ROOT LAYOUT
    ═══════════════════════════════════════════════════════ */
 
-export default function RootLayout({
+import { fetchProducts } from '@/src/lib/api/products';
+import { ProductProvider } from '@/src/context/ProductContext';
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch initial state for the context from the backend
+  const initialProducts = await fetchProducts();
+
   return (
     <html lang="en" className="dark">
       <body
@@ -80,18 +87,20 @@ export default function RootLayout({
           flex-col
         `}
       >
-        {/* Skip Navigation — Accessibility */}
-        <a href="#main-content" className="skip-nav">
-          Skip to main content
-        </a>
+        <ProductProvider initialProducts={initialProducts}>
+          {/* Skip Navigation — Accessibility */}
+          <a href="#main-content" className="skip-nav">
+            Skip to main content
+          </a>
 
-        <Header />
+          <Header />
 
-        <main id="main-content" className="flex-grow">
-          {children}
-        </main>
+          <main id="main-content" className="flex-grow">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </ProductProvider>
       </body>
     </html>
   );

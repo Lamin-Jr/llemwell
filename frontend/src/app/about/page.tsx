@@ -26,11 +26,7 @@ export default function AboutPage() {
       />
 
       {/* 3. Full-Bleed Image */}
-      <ImageShowcase
-        src="/images/belt_lifestyle.png"
-        alt="LLEMWELL lifestyle"
-        height="60vh"
-      />
+      <ImageShowcase src="/images/belt_lifestyle.png" alt="LLEMWELL lifestyle" height="60vh" />
 
       {/* 4. Split: Material */}
       <SplitContent

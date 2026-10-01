@@ -26,7 +26,6 @@ export async function submitContactForm(formData: FormData) {
 
     const data = await response.json();
     return { success: true, messageId: data.messageId };
-
   } catch (error) {
     console.error('Error submitting contact form:', error);
     return { success: false, error: 'Failed to submit the form. Please try again later.' };

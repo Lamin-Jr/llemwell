@@ -2,23 +2,14 @@ import HeroMedia from '@/components/sections/HeroMedia';
 import EditorialText from '@/components/sections/EditorialText';
 import ImageShowcase from '@/components/sections/ImageShowcase';
 import SplitContent from '@/components/sections/SplitContent';
-import ProductCard, { BackendProduct } from '@/components/ui/ProductCard';
+import ProductCard from '@/components/ui/ProductCard';
+
+import { fetchProducts } from '@/src/lib/api/products';
 
 export const revalidate = 60; // Revalidate the page every 60 seconds
 
 export default async function Home() {
-  let products: BackendProduct[] = [];
-  
-  try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
-    const res = await fetch(`${apiUrl}/api/products`, { next: { revalidate: 60 } });
-    if (res.ok) {
-      const data = await res.json();
-      products = data.products || [];
-    }
-  } catch (error) {
-    console.error('Failed to fetch products:', error);
-  }
+  const products = await fetchProducts();
 
   return (
     <main>
@@ -40,11 +31,7 @@ export default async function Home() {
       />
 
       {/* 3. Full-Bleed Detail Image */}
-      <ImageShowcase
-        src="/images/hero_a2.jpg"
-        alt="LLEMWELL belt close-up detail"
-        height="60vh"
-      />
+      <ImageShowcase src="/images/hero_a2.jpg" alt="LLEMWELL belt close-up detail" height="60vh" />
 
       {/* 4. Split Content — Material Story */}
       <SplitContent
@@ -61,14 +48,12 @@ export default async function Home() {
       <section className="section-padding">
         <div className="container-luxury">
           <div className="text-center mb-16">
-            <p className="luxury-subheading text-accent-warm mb-4">
-              The Collection
-            </p>
+            <p className="luxury-subheading text-accent-warm mb-4">The Collection</p>
             <h2 className="luxury-heading text-text-primary text-4xl md:text-5xl lg:text-6xl">
               Explore Our Pieces
             </h2>
           </div>
-          
+
           {products.length === 0 ? (
             <div className="text-center text-gray-500 py-12">
               <p>No products available yet. Check back later.</p>

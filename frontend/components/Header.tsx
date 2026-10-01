@@ -4,14 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useState, useCallback } from 'react';
-import {
-  motion,
-  useScroll,
-  useMotionValueEvent,
-  AnimatePresence,
-} from 'framer-motion';
-import { products } from '@/lib/data';
-
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import { useProducts } from '@/src/context/ProductContext';
 /* ═══════════════════════════════════════════════════════
    NAVIGATION DATA
    ═══════════════════════════════════════════════════════ */
@@ -124,6 +118,7 @@ const submenuItemVariants = {
    ═══════════════════════════════════════════════════════ */
 
 function SubmenuContent({ onClose }: { onClose: () => void }) {
+  const { products } = useProducts();
   return (
     <div className="flex-1 overflow-y-auto px-6 md:px-8 py-4 hide-scrollbar">
       <ul className="space-y-6">
@@ -135,15 +130,11 @@ function SubmenuContent({ onClose }: { onClose: () => void }) {
             initial="hidden"
             animate="visible"
           >
-            <Link
-              href={`/products/${product.slug}`}
-              onClick={onClose}
-              className="group block"
-            >
+            <Link href={`/products/${product.slug || product.id}`} onClick={onClose} className="group block">
               {/* Product Image */}
               <div className="relative aspect-[16/9] w-full overflow-hidden mb-3">
                 <Image
-                  src={product.image}
+                  src={product.image || '/images/placeholder.jpg'}
                   alt={product.name}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
@@ -391,9 +382,7 @@ export default function Header() {
                           <button
                             onClick={() => handleNavClick(item)}
                             className={`w-full flex items-center justify-between py-4 group transition-opacity duration-300 ${
-                              submenuOpen
-                                ? 'opacity-100'
-                                : 'opacity-70 hover:opacity-100'
+                              submenuOpen ? 'opacity-100' : 'opacity-70 hover:opacity-100'
                             }`}
                             style={{ color: 'var(--foreground)' }}
                           >
