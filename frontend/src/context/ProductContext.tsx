@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { BackendProduct } from '@/src/types';
+import { BackendProduct } from '@/types';
 
 interface ProductContextType {
   products: BackendProduct[];

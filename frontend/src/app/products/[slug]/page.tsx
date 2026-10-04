@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useProducts } from '@/src/context/ProductContext';
+import { useProducts } from '@/context/ProductContext';
 import { useState } from 'react';
 import Image from 'next/image';
 import HeroMedia from '@/components/sections/HeroMedia';

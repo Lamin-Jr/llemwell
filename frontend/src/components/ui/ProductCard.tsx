@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { BackendProduct } from '@/src/types';
+import { BackendProduct } from '@/types';
 interface ProductCardProps {
   product: BackendProduct;
 }

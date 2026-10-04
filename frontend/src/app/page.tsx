@@ -4,7 +4,7 @@ import ImageShowcase from '@/components/sections/ImageShowcase';
 import SplitContent from '@/components/sections/SplitContent';
 import ProductCard from '@/components/ui/ProductCard';
 
-import { fetchProducts } from '@/src/lib/api/products';
+import { fetchProducts } from '@/lib/api/products';
 
 export const revalidate = 60; // Revalidate the page every 60 seconds
 

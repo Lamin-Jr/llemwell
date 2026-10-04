@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { submitContactForm } from '../actions';
+import { submitContactForm } from '@/actions';
 import HeroMedia from '@/components/sections/HeroMedia';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import GhostButton from '@/components/ui/GhostButton';

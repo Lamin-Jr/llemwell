@@ -10,19 +10,19 @@ import Footer from '@/components/Footer';
    ═══════════════════════════════════════════════════════ */
 
 const llemwellFont = localFont({
-  src: './fonts/llemwell_2.otf',
+  src: '../assets/fonts/llemwell_2.otf',
   variable: '--font-llemwell',
   display: 'swap',
 });
 
 // const llemwell2Font = localFont({
-//   src: './fonts/llemwell_2.otf',
+//   src: '../assets/fonts/llemwell_2.otf',
 //   variable: '--font-llemwell-2',
 //   display: 'swap',
 // });
 
 const llemwellSmallFont = localFont({
-  src: './fonts/llemwell_small.otf',
+  src: '../assets/fonts/llemwell_small.otf',
   variable: '--font-llemwell-small',
   display: 'auto',
 });
@@ -62,8 +62,8 @@ export const metadata: Metadata = {
    ROOT LAYOUT
    ═══════════════════════════════════════════════════════ */
 
-import { fetchProducts } from '@/src/lib/api/products';
-import { ProductProvider } from '@/src/context/ProductContext';
+import { fetchProducts } from '@/lib/api/products';
+import { ProductProvider } from '@/context/ProductContext';
 
 export default async function RootLayout({
   children,

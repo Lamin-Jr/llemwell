@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Menu, X, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useState, useCallback } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { useProducts } from '@/src/context/ProductContext';
+import { useProducts } from '@/context/ProductContext';
 /* ═══════════════════════════════════════════════════════
    NAVIGATION DATA
    ═══════════════════════════════════════════════════════ */
@@ -18,7 +18,7 @@ interface NavItem {
 
 const MENU_ITEMS: NavItem[] = [
   { label: 'The Collection', href: '/products', hasSubmenu: true },
-  { label: 'The Belt', href: '/product' },
+  { label: 'The Belt', href: '/products' },
   { label: 'Heritage', href: '/about' },
   { label: 'Client Care', href: '/contact' },
   { label: 'Terms of Use', href: '/terms' },

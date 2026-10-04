@@ -21,12 +21,11 @@
     /* ───── SCALABLE PATH ALIASES ───── */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["components/*"],
-      "@ui/*": ["components/ui/*"],
-      "@lib/*": ["lib/*"],
-      "@data/*": ["lib/data/*"],
-      "@types/*": ["lib/types/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@ui/*": ["./src/components/ui/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@types/*": ["./src/types/*"]
     }
   },
   "include": [

@@ -3,7 +3,7 @@ import EditorialText from '@/components/sections/EditorialText';
 import ProductCard from '@/components/ui/ProductCard';
 import GhostButton from '@/components/ui/GhostButton';
 
-import { fetchProducts } from '@/src/lib/api/products';
+import { fetchProducts } from '@/lib/api/products';
 
 export const revalidate = 60; // Revalidate the page every 60 seconds
 

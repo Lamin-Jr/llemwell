@@ -1,4 +1,4 @@
-import { BackendProduct } from '@/src/types';
+import { BackendProduct } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
