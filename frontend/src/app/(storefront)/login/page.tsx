@@ -63,7 +63,7 @@ export default async function LoginPage(props: { searchParams: Promise<{ message
         />
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute bottom-12 left-12 text-white">
-          <h2 className="text-4xl font-light mb-2 tracking-wide font-serif">LLEMWELL</h2>
+          <h2 className="text-4xl font-light mb-2 tracking-wide font-brand-alt">LLEMWELL</h2>
           <p className="text-sm font-light tracking-widest uppercase">
             The Essence of Modern Luxury
           </p>

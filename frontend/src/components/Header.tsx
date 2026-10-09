@@ -279,16 +279,17 @@ export default function Header() {
             className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center"
           >
             <div
-              className={`relative transition-all duration-500 ${
-                scrolled ? 'w-12 h-12 md:w-14 md:h-14' : 'w-16 h-16 md:w-20 md:h-20'
+              className={`relative transition-all duration-500  flex justify-around ${
+                scrolled ? 'w-12 h-12 md:w-14 md:h-14' : 'w-16 h-16 mt-5 mb-5 md:w-20 md:h-20'
               }`}
             >
               <Image
-                src="/images/logollemwell.png"
+                src="/images/llmll_logo.png"
                 alt="LLEMWELL"
-                fill
+                // fill
                 className="object-contain"
-                sizes="80px"
+                width={60}
+                height={60}
                 priority
               />
             </div>
@@ -419,8 +420,8 @@ export default function Header() {
                   className="px-6 md:px-12 py-8 shrink-0"
                   style={{ borderTop: '1px solid var(--border-subtle)' }}
                 >
-                  <p className="luxury-caption" style={{ color: 'var(--color-text-tertiary)' }}>
-                    © {new Date().getFullYear()} LLEMWELL
+                  <p className="font-brand-alt" style={{ color: 'var(--color-text-tertiary)' }}>
+                    © {new Date().getFullYear()} llemMELL
                   </p>
                 </div>
               </motion.div>
