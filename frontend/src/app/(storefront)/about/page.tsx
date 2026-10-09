@@ -13,7 +13,7 @@ export default function AboutPage() {
         imageSrc="/images/concep_dx_1.jpg"
         imageAlt="LLEMWELL Heritage"
         heading="Our Heritage"
-        subheading="The Story of LLEMWELL"
+        subheading={`The Story of <span className="font-brand-alt">LLEMWELL</span>`}
         overlayOpacity={55}
         showScrollIndicator={true}
       />

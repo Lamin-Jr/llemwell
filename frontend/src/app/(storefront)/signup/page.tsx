@@ -72,7 +72,7 @@ export default async function SignupPage(props: { searchParams: Promise<{ messag
         />
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute bottom-12 right-12 text-white text-right">
-          <h2 className="text-4xl font-light mb-2 tracking-wide font-serif">LLEMWELL</h2>
+          <h2 className="text-4xl font-light mb-2 tracking-wide font-brand-alt">LLEMWELL</h2>
           <p className="text-sm font-light tracking-widest uppercase">Join the elite</p>
         </div>
       </div>

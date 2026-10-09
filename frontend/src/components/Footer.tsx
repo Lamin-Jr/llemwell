@@ -15,13 +15,13 @@ export default function Footer() {
       <div className="container-luxury text-center">
         <Link
           href="/"
-          className="luxury-heading text-text-primary text-xl tracking-[0.2em] inline-block"
+          className="font-brand-alt text-text-primary text-xl tracking-[0.2em] inline-block"
         >
-          LLEMWELL
+          llemMELL
         </Link>
 
         <p className="luxury-caption text-text-tertiary mt-2">
-          © {new Date().getFullYear()} LLEMWELL Genève. All rights reserved.
+          © {new Date().getFullYear()} <span className='font-brand-alt text-text-primary text-l'>llemMELL</span> Genève. All rights reserved.
         </p>
 
         <div className="flex justify-center gap-8 mt-12">
