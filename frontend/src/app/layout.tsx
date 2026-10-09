@@ -2,27 +2,26 @@ import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+
 
 /* ═══════════════════════════════════════════════════════
    FONT LOADING — LLEMWELL Brand Fonts
    ═══════════════════════════════════════════════════════ */
 
 const llemwellFont = localFont({
-  src: './fonts/llemwell_2.otf',
+  src: '../assets/fonts/llemwell_2.otf',
   variable: '--font-llemwell',
   display: 'swap',
 });
 
-// const llemwell2Font = localFont({
-//   src: './fonts/llemwell_2.otf',
-//   variable: '--font-llemwell-2',
-//   display: 'swap',
-// });
+const llemwell2Font = localFont({
+  src: '../assets/fonts/llemwell_2.otf',
+  variable: '--font-llemwell-2',
+  display: 'swap',
+});
 
 const llemwellSmallFont = localFont({
-  src: './fonts/llemwell_small.otf',
+  src: '../assets/fonts/llemwell_small.otf',
   variable: '--font-llemwell-small',
   display: 'auto',
 });
@@ -52,7 +51,8 @@ export const metadata: Metadata = {
   keywords: ['LLEMWELL', 'luxury belts', 'handcrafted leather', 'designer belts', 'studded belt'],
   openGraph: {
     title: 'LLEMWELL | Handcrafted Italian Made Belts',
-    description: 'Handcrafted luxury belts forged from distressed calfskin and heavy metal hardware.',
+    description:
+      'Handcrafted luxury belts forged from distressed calfskin and heavy metal hardware.',
     type: 'website',
   },
 };
@@ -73,6 +73,7 @@ export default function RootLayout({
           ${inter.variable} 
           ${playfair.variable} 
           ${llemwellFont.variable} 
+          ${llemwell2Font.variable} 
           ${llemwellSmallFont.variable} 
           antialiased 
           min-h-screen 
@@ -80,18 +81,9 @@ export default function RootLayout({
           flex-col
         `}
       >
-        {/* Skip Navigation — Accessibility */}
-        <a href="#main-content" className="skip-nav">
-          Skip to main content
-        </a>
-
-        <Header />
-
-        <main id="main-content" className="flex-grow">
+        <main className="flex-grow">
           {children}
         </main>
-
-        <Footer />
       </body>
     </html>
   );

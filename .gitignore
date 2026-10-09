@@ -51,6 +51,7 @@ frontend/next-env.d.ts
 
 # dependencies BE
 backend/node_modules
+backend/dist
 backend/.pnp
 backend/.pnp.*
 backend/.yarn/*

@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import prisma from './config/prisma';
 import userRoutes from './routes/userRoutes';
 import categoryRoutes from './routes/categoryRoutes';
@@ -8,7 +7,6 @@ import productRoutes from './routes/productRoutes';
 import orderRoutes from './routes/orderRoutes';
 import contactRoutes from './routes/contactRoutes';
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
