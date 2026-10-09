@@ -2,14 +2,19 @@ import HeroMedia from '@/components/sections/HeroMedia';
 import EditorialText from '@/components/sections/EditorialText';
 import ProductCard from '@/components/ui/ProductCard';
 import GhostButton from '@/components/ui/GhostButton';
-import { products } from '@/lib/data';
 
-export default function ProductsPage() {
+import { fetchProducts } from '@/lib/api/products';
+
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
+export default async function ProductsPage() {
+  const products = await fetchProducts();
+
   return (
     <main>
       {/* 1. Hero */}
       <HeroMedia
-        imageSrc="/images/heroShowcase.jpg"
+        imageSrc="/images/herox8.jpg"
         imageAlt="The LLEMWELL Collection"
         heading="The Collection"
         subheading="Handcrafted Pieces"
@@ -20,15 +25,21 @@ export default function ProductsPage() {
       {/* 2. Product Grid */}
       <section className="section-padding">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {products.length === 0 ? (
+            <div className="text-center text-gray-500 py-12">
+              <p>No products available yet. Check back later.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* 3. Editorial CTA */}
+      {/* 3. A Content Drax CTA */}
       <EditorialText
         subheading="Our Heritage"
         heading="Each Piece Tells a Story"

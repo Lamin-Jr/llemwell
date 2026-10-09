@@ -1,26 +1,43 @@
 {
-  "name": "backend",
+  "name": "llemwell backend",
   "version": "1.0.0",
-  "description": "Firebase Cloud Functions for LLEMWELL",
-  "main": "lib/index.js",
+  "description": "Cloud Functions and database secure communication for LLEMWELL",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "build": "prisma generate && tsc",
+    "start": "node --env-file=.env dist/index.js",
+    "dev": "ts-node-dev --env-file=.env --respawn --transpile-only src/index.ts",
+    "postinstall": "prisma generate",
+    "start:db": "supabase start",
+    "stop:db": "supabase stop",
+    "studio:db": "supabase studio"
   },
   "engines": {
-    "node": "20"
-  },
-  "dependencies": {
-    "firebase-admin": "^12.0.0",
-    "firebase-functions": "^5.0.0"
+    "node": ">=20.0.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.0.0",
+    "@types/pg": "^8.20.3",
+    "prisma": "^7.9.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.22.0",
+    "postgres": "^3.4.9",
+    "stripe": "^22.4.0"
+  },
+  "prisma": {
+    "seed": "ts-node-dev seed.ts"
+  }
 }

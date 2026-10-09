@@ -10,7 +10,7 @@ export default function AboutPage() {
     <main>
       {/* 1. Hero */}
       <HeroMedia
-        imageSrc="/images/belt_detail.png"
+        imageSrc="/images/concep_dx_1.jpg"
         imageAlt="LLEMWELL Heritage"
         heading="Our Heritage"
         subheading="The Story of LLEMWELL"
@@ -26,11 +26,7 @@ export default function AboutPage() {
       />
 
       {/* 3. Full-Bleed Image */}
-      <ImageShowcase
-        src="/images/belt_lifestyle.png"
-        alt="LLEMWELL lifestyle"
-        height="60vh"
-      />
+      <ImageShowcase src="/images/belt_lifestyle.png" alt="LLEMWELL lifestyle" height="60vh" />
 
       {/* 4. Split: Material */}
       <SplitContent

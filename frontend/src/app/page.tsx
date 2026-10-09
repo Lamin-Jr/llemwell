@@ -3,18 +3,21 @@ import EditorialText from '@/components/sections/EditorialText';
 import ImageShowcase from '@/components/sections/ImageShowcase';
 import SplitContent from '@/components/sections/SplitContent';
 import ProductCard from '@/components/ui/ProductCard';
-import { products } from '@/lib/data';
 
-export default function Home() {
+import { fetchProducts } from '@/lib/api/products';
+
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
+export default async function Home() {
+  const products = await fetchProducts();
+
   return (
     <main>
       {/* 1. Cinematic Hero */}
       <HeroMedia
-        imageSrc="/design_content/hero_tag_1.jpg.jpeg"
+        imageSrc="/images/home_hero_x1.jpg"
         imageAlt="LLEMWELL Luxury Belt"
-        // subheading="Uncompromising Craftsmanship"
         heading=""
-        // ctaText="Discover the Collection"
         ctaLink="/products"
         showScrollIndicator={true}
         overlayOpacity={50}
@@ -28,15 +31,11 @@ export default function Home() {
       />
 
       {/* 3. Full-Bleed Detail Image */}
-      <ImageShowcase
-        src="/product-images/dragon-fly-belt-hero-x2.png"
-        alt="LLEMWELL belt close-up detail"
-        height="60vh"
-      />
+      <ImageShowcase src="/images/hero_a2.jpg" alt="LLEMWELL belt close-up detail" height="60vh" />
 
       {/* 4. Split Content — Material Story */}
       <SplitContent
-        imageSrc="/product-images/dragon-fly-model-x2.png"
+        imageSrc="/images/herox5.jpg"
         imageAlt="LLEMWELL distressed calfskin leather"
         subheading="The Material"
         heading="Distressed Calfskin"
@@ -49,24 +48,29 @@ export default function Home() {
       <section className="section-padding">
         <div className="container-luxury">
           <div className="text-center mb-16">
-            <p className="luxury-subheading text-accent-warm mb-4">
-              The Collection
-            </p>
+            <p className="luxury-subheading text-accent-warm mb-4">The Collection</p>
             <h2 className="luxury-heading text-text-primary text-4xl md:text-5xl lg:text-6xl">
               Explore Our Pieces
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+
+          {products.length === 0 ? (
+            <div className="text-center text-gray-500 py-12">
+              <p>No products available yet. Check back later.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* 6. CTA Hero */}
       <HeroMedia
-        imageSrc="/images/heroShowcase.jpg"
+        imageSrc="/images/herox4.jpg"
         imageAlt="A Statement of Power"
         heading="A Statement of Power"
         subheading="Worn by the few who define the future"

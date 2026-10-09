@@ -5,7 +5,7 @@
 # FRONT-END
 
 # dependencies FE
-frontend/node_modules
+frontend/node_modules/
 frontend/.pnp
 frontend/.pnp.*
 frontend/.yarn/*
@@ -51,6 +51,7 @@ frontend/next-env.d.ts
 
 # dependencies BE
 backend/node_modules
+backend/dist
 backend/.pnp
 backend/.pnp.*
 backend/.yarn/*
