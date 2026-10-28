@@ -137,7 +137,7 @@ export default async function LoginPage(props: { searchParams: Promise<{ message
             )}
 
             <p className="text-sm text-center mt-6 text-gray-500">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link
                 href="/signup"
                 className="text-black font-medium underline underline-offset-4 hover:text-gray-600 transition-colors"

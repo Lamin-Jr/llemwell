@@ -78,15 +78,6 @@ const submenuMobileVariants = {
   },
 };
 
-/* Mobile primary panel — slides out left when submenu opens */
-const panelMobileHideVariants = {
-  visible: { x: 0 },
-  hidden: {
-    x: '-30%',
-    transition: { duration: 0.35, ease: LUXURY_EASE },
-  },
-};
-
 const menuItemVariants = {
   hidden: { opacity: 0, x: -20 },
   visible: (i: number) => ({
