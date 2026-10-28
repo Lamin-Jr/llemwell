@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+
 
 /* ═══════════════════════════════════════════════════════
    FONT LOADING — LLEMWELL Brand Fonts
@@ -15,11 +14,11 @@ const llemwellFont = localFont({
   display: 'swap',
 });
 
-// const llemwell2Font = localFont({
-//   src: '../assets/fonts/llemwell_2.otf',
-//   variable: '--font-llemwell-2',
-//   display: 'swap',
-// });
+const llemwell2Font = localFont({
+  src: '../assets/fonts/llemwell_2.otf',
+  variable: '--font-llemwell-2',
+  display: 'swap',
+});
 
 const llemwellSmallFont = localFont({
   src: '../assets/fonts/llemwell_small.otf',
@@ -62,17 +61,11 @@ export const metadata: Metadata = {
    ROOT LAYOUT
    ═══════════════════════════════════════════════════════ */
 
-import { fetchProducts } from '@/lib/api/products';
-import { ProductProvider } from '@/context/ProductContext';
-
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Fetch initial state for the context from the backend
-  const initialProducts = await fetchProducts();
-
   return (
     <html lang="en" className="dark">
       <body
@@ -80,6 +73,7 @@ export default async function RootLayout({
           ${inter.variable} 
           ${playfair.variable} 
           ${llemwellFont.variable} 
+          ${llemwell2Font.variable} 
           ${llemwellSmallFont.variable} 
           antialiased 
           min-h-screen 
@@ -87,20 +81,9 @@ export default async function RootLayout({
           flex-col
         `}
       >
-        <ProductProvider initialProducts={initialProducts}>
-          {/* Skip Navigation — Accessibility */}
-          <a href="#main-content" className="skip-nav">
-            Skip to main content
-          </a>
-
-          <Header />
-
-          <main id="main-content" className="flex-grow">
-            {children}
-          </main>
-
-          <Footer />
-        </ProductProvider>
+        <main className="flex-grow">
+          {children}
+        </main>
       </body>
     </html>
   );

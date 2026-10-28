@@ -31,3 +31,15 @@ export async function submitContactForm(formData: FormData) {
     return { success: false, error: 'Failed to submit the form. Please try again later.' };
   }
 }
+
+export async function subscribeNewsletter(formData: FormData) {
+  const email = formData.get('email') as string;
+  if (!email) {
+    return { success: false, error: 'Email is required.' };
+  }
+  
+  // Mock API call
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  return { success: true };
+}

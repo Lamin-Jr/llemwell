@@ -2,9 +2,8 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { headers } from 'next/headers';
 
-export default async function SignupPage(props: { searchParams: Promise<{ message: string }> }) {
+export default async function LoginPage(props: { searchParams: Promise<{ message: string }> }) {
   const searchParams = await props.searchParams;
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
@@ -13,29 +12,23 @@ export default async function SignupPage(props: { searchParams: Promise<{ messag
     redirect('/');
   }
 
-  const signUp = async (formData: FormData) => {
+  const signIn = async (formData: FormData) => {
     'use server';
 
-    const origin = (await headers()).get('origin');
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const supabase = await createClient();
 
-    const { error, data } = await supabase.auth.signUp({
+    const { error, data } = await supabase.auth.signInWithPassword({
       email,
       password,
-      options: {
-        emailRedirectTo: `${origin}/auth/callback`,
-      },
     });
 
     if (error) {
-      console.error('Signup error:', error.message);
-      return redirect(`/signup?message=${encodeURIComponent(error.message)}`);
+      console.error('Login error:', error.message);
+      return redirect(`/login?message=${encodeURIComponent(error.message)}`);
     }
 
-    // If Email Confirmations are turned OFF in Supabase, signUp returns a session immediately.
-    // We need to sync them to the backend and redirect to home.
     if (data.session) {
       try {
         await fetch(
@@ -46,38 +39,38 @@ export default async function SignupPage(props: { searchParams: Promise<{ messag
               Authorization: `Bearer ${data.session.access_token}`,
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: data.user?.email }),
+            body: JSON.stringify({ email: data.user.email }),
           }
         );
       } catch (err) {
-        console.error('Failed to sync user with backend on signup', err);
+        console.error('Failed to sync user with backend on login', err);
       }
-
-      return redirect('/');
     }
 
-    return redirect('/signup?message=Check your email to continue sign in process');
+    return redirect('/');
   };
 
   return (
-    <div className="flex min-h-screen w-full bg-white text-gray-900 font-sans flex-row-reverse">
-      {/* Right side: Premium Image Banner */}
+    <div className="flex min-h-screen w-full bg-white text-gray-900 font-sans">
+      {/* Left side: Premium Image Banner */}
       <div className="hidden lg:flex w-1/2 relative bg-gray-100">
         <Image
-          src="/auth-banner.jpg"
+          src="/images/auth-img-1.jpg"
           alt="LLEMWELL Editorial Fashion"
           fill
           className="object-cover"
           priority
         />
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="absolute bottom-12 right-12 text-white text-right">
-          <h2 className="text-4xl font-light mb-2 tracking-wide font-serif">LLEMWELL</h2>
-          <p className="text-sm font-light tracking-widest uppercase">Join the elite</p>
+        <div className="absolute bottom-12 left-12 text-white">
+          <h2 className="text-4xl font-light mb-2 tracking-wide font-brand-alt">LLEMWELL</h2>
+          <p className="text-sm font-light tracking-widest uppercase">
+            The Essence of Modern Luxury
+          </p>
         </div>
       </div>
 
-      {/* Left side: Signup Form */}
+      {/* Right side: Login Form */}
       <div className="flex flex-1 flex-col justify-center items-center px-8 sm:px-12 lg:px-24">
         <div className="w-full max-w-md">
           <Link
@@ -101,12 +94,10 @@ export default async function SignupPage(props: { searchParams: Promise<{ messag
             Return to Store
           </Link>
 
-          <form action={signUp} className="flex flex-col gap-6">
+          <form action={signIn} className="flex flex-col gap-6">
             <div>
-              <h1 className="text-3xl font-normal mb-2 tracking-tight">Create an account</h1>
-              <p className="text-gray-500 font-light">
-                Join LLEMWELL for exclusive access to premium collections.
-              </p>
+              <h1 className="text-3xl font-normal mb-2 tracking-tight">Welcome back</h1>
+              <p className="text-gray-500 font-light">Enter your details to access your account.</p>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -136,24 +127,22 @@ export default async function SignupPage(props: { searchParams: Promise<{ messag
             </div>
 
             <button className="mt-4 bg-black text-white rounded-none px-4 py-3 text-sm font-medium tracking-wide uppercase hover:bg-gray-800 transition-colors w-full">
-              Create Account
+              Sign In
             </button>
 
             {searchParams?.message && (
-              <p
-                className={`mt-2 p-3 text-sm border rounded text-center ${searchParams.message.includes('Check') ? 'bg-green-50 text-green-700 border-green-100' : 'bg-red-50 text-red-600 border-red-100'}`}
-              >
+              <p className="mt-2 p-3 bg-red-50 text-red-600 text-sm border border-red-100 rounded text-center">
                 {searchParams.message}
               </p>
             )}
 
             <p className="text-sm text-center mt-6 text-gray-500">
-              Already have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link
-                href="/login"
+                href="/signup"
                 className="text-black font-medium underline underline-offset-4 hover:text-gray-600 transition-colors"
               >
-                Log in
+                Sign up
               </Link>
             </p>
           </form>
