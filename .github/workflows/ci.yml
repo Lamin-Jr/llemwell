@@ -14,6 +14,9 @@ jobs:
   validate-backend:
     name: Backend Lint, Typecheck & Build
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+      SUPABASE_JWT_SECRET: ci-mock-secret-placeholder
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -40,6 +43,10 @@ jobs:
   validate-frontend:
     name: Frontend Lint, Typecheck & Build
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_API_URL: https://api.llemwell.com
+      NEXT_PUBLIC_SUPABASE_URL: https://vsznaxvzvwpecevppzex.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
