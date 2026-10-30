@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
@@ -11,7 +12,14 @@ if (!process.env.DATABASE_URL) {
 declare global {
   var prisma: PrismaClient | undefined;
 }
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+const isProduction = process.env.NODE_ENV === "production";
+const isInternalRailway = process.env.DATABASE_URL?.includes("railway.internal");
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: isProduction && !isInternalRailway ? { rejectUnauthorized: false } : undefined,
+});
 const adapter = new PrismaPg(pool);
 
 const prisma = global.prisma || new PrismaClient({ adapter });

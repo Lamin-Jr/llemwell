@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { type ReactNode, type ButtonHTMLAttributes } from 'react';
+import { type ReactNode } from 'react';
 
 interface GhostButtonProps {
   children: ReactNode;

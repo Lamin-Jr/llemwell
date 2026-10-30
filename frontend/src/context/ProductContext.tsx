@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { BackendProduct } from '@/types';
 
 interface ProductContextType {
@@ -20,16 +20,17 @@ export function ProductProvider({
   initialProducts?: BackendProduct[] 
 }) {
   const [products, setProducts] = useState<BackendProduct[]>(initialProducts);
+  const [prevInitialProducts, setPrevInitialProducts] = useState<BackendProduct[]>(initialProducts);
   const [isLoading, setIsLoading] = useState(!initialProducts.length);
 
-  // If initialProducts weren't provided or we want to re-fetch on the client, we could do it here.
-  // But relying on SSR initialProducts is the most scalable Next.js architecture.
-  useEffect(() => {
+  // Synchronize state when initialProducts from SSR changes without cascading effect
+  if (initialProducts !== prevInitialProducts) {
+    setPrevInitialProducts(initialProducts);
+    setProducts(initialProducts);
     if (initialProducts.length > 0) {
-      setProducts(initialProducts);
       setIsLoading(false);
     }
-  }, [initialProducts]);
+  }
 
   const getProductBySlugOrId = (slugOrId: string) => {
     return products.find(p => p.slug === slugOrId || p.id === slugOrId);
