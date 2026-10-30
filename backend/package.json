@@ -1,0 +1,45 @@
+{
+  "name": "llemwell backend",
+  "version": "1.0.0",
+  "description": "Cloud Functions and database secure communication for LLEMWELL",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "prisma generate && tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "ts-node-dev seed.ts",
+    "start:db": "supabase start",
+    "stop:db": "supabase stop",
+    "studio:db": "supabase studio"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.20.3",
+    "prisma": "^7.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.0"
+  },
+  "private": true,
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.22.0",
+    "postgres": "^3.4.9",
+    "stripe": "^22.4.0"
+  },
+  "prisma": {
+    "seed": "ts-node-dev seed.ts"
+  }
+}

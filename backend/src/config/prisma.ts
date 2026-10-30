@@ -1,0 +1,29 @@
+import "dotenv/config";
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "@prisma/client";
+
+// Fail-fast checkpoint
+if (!process.env.DATABASE_URL) {
+  throw new Error("CRITICAL ERROR: DATABASE_URL environment variable is missing.");
+}
+
+// Prevent multiple instances of Prisma Client in development
+declare global {
+  var prisma: PrismaClient | undefined;
+}
+
+const isProduction = process.env.NODE_ENV === "production";
+const isInternalRailway = process.env.DATABASE_URL?.includes("railway.internal");
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: isProduction && !isInternalRailway ? { rejectUnauthorized: false } : undefined,
+});
+const adapter = new PrismaPg(pool);
+
+const prisma = global.prisma || new PrismaClient({ adapter });
+
+if (process.env.NODE_ENV === "development") global.prisma = prisma;
+
+export default prisma;
